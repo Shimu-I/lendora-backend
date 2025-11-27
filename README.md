@@ -1,6 +1,7 @@
 This is the Backend Project Folder Structure
 
-my-project-backend/
+```
+anchor-backend/
 │
 ├── api/
 │   ├── auth/
@@ -22,6 +23,9 @@ my-project-backend/
 │   └── schema.sql
 │
 └── README.md
+
+```
+
 
 # 📌 This repo can be hosted on:
 
