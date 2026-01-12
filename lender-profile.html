@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lender Profile - Anchor</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="images/icons/favicon.png">
+
+  <!-- Fonts & Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Your existing styles + lender profile specific -->
+  <link rel="stylesheet" href="styles/index.css">
+  <link rel="stylesheet" href="styles/lender-profile.css">
+  <link rel="stylesheet" href="styles/header-footer.css">
+    <link rel="stylesheet" href="styles/notifications.css">
+</head>
+
+<body>
+
+  <!-- Header -->
+  <div id="headerPlaceholder"></div>
+
+  <!-- Lender Profile Section -->
+  <div class="profile-container">
+    <h1 class="profile-title">User Profile</h1>
+    
+    <div class="profile-header">
+      <div class="profile-info-section">
+        <img src="images/user-avatar.jpg" alt="User Avatar" class="profile-avatar">
+        
+        <div class="profile-details">
+          <h2 class="user-name">User Name: David-user</h2>
+          <p class="user-id">User ID: 85998765</p>
+          <p class="user-email">Email: user@gmail.com</p>
+          <p class="user-rating">Your rating: 4.5 form 40 reviews</p>
+          
+          <div class="profile-buttons">
+            <button class="btn-edit">Edit</button>
+            <button class="btn-notifications">Notifications</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="profile-stats">
+        <div class="stat-box">
+          <h3>Total Funds Collected</h3>
+          <div class="stat-value">৳0</div>
+        </div>
+        <div class="stat-box">
+          <h3>Total Loans Collected</h3>
+          <div class="stat-value">৳0</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Loan Request Section -->
+    <div class="section-container">
+      <h2 class="section-title">Loan Request (0)</h2>
+      <div class="empty-state">N/A</div>
+    </div>
+
+    <!-- Funding Post Section -->
+    <div class="section-container">
+      <h2 class="section-title">Funding Post (0)</h2>
+      <div class="empty-state">N/A</div>
+    </div>
+
+    <!-- Provided Loans Section -->
+    <div class="section-container">
+      <h2 class="section-title">Provided Loans (2)</h2>
+      
+      <div class="cards-grid">
+        <!-- Provided Loan Card 1 -->
+        <div class="card">
+          <div class="card-header">
+            <img src="images/user-avatar.jpg" alt="User Avatar" class="card-avatar">
+            <span class="card-user-name">User Name: Elli_user</span>
+          </div>
+          
+          <div class="card-row">
+            <span class="card-label">Category</span>
+            <span class="badge badge-collage">Collage</span>
+          </div>
+          <div class="card-row">
+            <span class="card-label">Amount needed:</span>
+            <span class="card-value">5000 taka</span>
+          </div>
+          <div class="card-row">
+            <span class="card-label">Date:</span>
+            <span class="card-value">12 nov, 2025</span>
+          </div>
+          <div class="card-row">
+            <span class="card-label">Offers status</span>
+            <div class="status-buttons">
+              <span class="badge badge-offered">Offered</span>
+             <a href="payment-gateway.html" class="btn-send-money">Send Money</a>
+            </div>
+          </div>
+          <button class="btn-view-details">View Details</button>
+        </div>
+
+        <!-- Provided Loan Card 2 -->
+        <div class="card">
+          <div class="card-header">
+            <img src="images/user-avatar.jpg" alt="User Avatar" class="card-avatar">
+            <span class="card-user-name">User Name: Elli_user</span>
+          </div>
+          
+          <div class="card-row">
+            <span class="card-label">Category</span>
+            <span class="badge badge-collage">Collage</span>
+          </div>
+          <div class="card-row">
+            <span class="card-label">Amount needed:</span>
+            <span class="card-value">5000 taka</span>
+          </div>
+          <div class="card-row">
+            <span class="card-label">Date:</span>
+            <span class="card-value">12 nov, 2025</span>
+          </div>
+          <div class="card-row">
+            <span class="card-label">Offers status</span>
+            <div class="status-buttons">
+              <span class="badge badge-accepted">Accepted</span>
+               <a href="payment-gateway.html" class="btn-send-money">Send Money</a>
+            </div>
+          </div>
+          <button class="btn-view-details">View Details</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div id="footerPlaceholder"></div>
+
+  <script src="javascript/header-footer.js"></script>
+    <script src="javascript/notifications.js"></script>
+</body>
+
+</html>

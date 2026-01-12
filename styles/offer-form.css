@@ -1,0 +1,342 @@
+
+* {
+  margin: 0;
+  padding: 0;
+
+}
+
+body { 
+ background: #0a1f2f;
+  min-height: 100vh;
+  margin: 0;
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero {
+  width: 739px;
+  height: 705px;
+
+  border-radius: 5px;
+  padding: 1px;
+  margin: auto;
+  border-style: none;
+
+}
+
+
+.form {
+  width: 100%;
+  height: 100%;
+  background: #0a1f2f;
+  
+  padding: 48px 80px 60px;
+  position: relative;
+  color: white;
+  overflow: hidden;
+
+
+}
+
+/* === TITLE & SUBTITLE === */
+.title {
+  position: absolute;
+  left: 118px;
+  top: 29px;
+  width: 505px;
+  height: 30px;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 30px;
+  text-align: center;
+  color: #70C1BF;
+}
+
+.subtitle {
+  position: absolute;
+  left: 98px;
+  top: 64px;
+  width: 553px;
+  height: 34px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #70C1BF;
+  opacity: 0.95;
+}
+
+/* === SECTION COMMON === */
+.section {
+  position: absolute;
+}
+
+.section-num {
+  position: absolute;
+  left: 0;
+  font-weight: 700;
+  font-size: 20px;
+  color: #70C1BF;
+}
+
+.section-label {
+  position: absolute;
+  left: 31px;
+  font-weight: 700;
+  font-size: 20px;
+  color: #70C1BF;
+}
+
+.hint {
+  position: absolute;
+  font-size: 12px;
+  color: #6F8383;
+}
+
+/* 1. Offer Amount */
+.amount-section {
+  left: 115px;
+  top: 132px;
+  width: 418px;
+  height: 39px;
+}
+
+.amount-section .section-num {
+  top: 0;
+}
+
+.amount-section .section-label {
+  top: 0;
+}
+
+.amount-section .hint {
+  left: 31px;
+  top: 30px;
+  width: 142px;
+  height: 15px;
+}
+
+.input-amount {
+  position: absolute;
+  left: 200px;
+  top: 4px;
+  width: 207px;
+  height: 35px;
+  background: #D9D9D9;
+  border: none;
+  border-radius: 5px;
+  padding: 0 15px;
+  font-size: 14px;
+  color: #012324;
+}
+
+/* 2. Expected Return */
+.interest-section {
+  left: 115px;
+  top: 191px;
+  width: 418px;
+  height: 76px;
+}
+
+.interest-section .section-num {
+  top: 0;
+}
+
+.interest-section .section-label {
+  top: 0;
+}
+
+.interest-wrapper {
+  position: absolute;
+  left: 31px;
+  top: 36px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+/* CHANGE IS HERE - WHITE BACKGROUND + DARK TEXT */
+.select-interest {
+  width: 130px;
+  height: 50px;
+  background: #FFFFFF;
+  border: 1px solid #70C1BF;
+  border-radius: 5px;
+  color: #012324;
+  padding: 0 40px 0 15px;
+  font-size: 14px;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='10' viewBox='0 0 16 10'%3E%3Cpath fill='%23000000' d='M0 0l8 10 8-10z'/%3E%3C/svg%3E");
+  /* ← black arrow */
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+}
+
+.custom-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.custom-text {
+  font-size: 12px;
+  color: #B1C7CB;
+}
+
+.input-custom {
+  width: 59px;
+  height: 35px;
+  background: #FFFFFF;
+  border-radius: 5px;
+  border: none;
+  padding: 0 10px;
+  font-size: 14px;
+}
+
+/* 3. Repayment Plan */
+.repayment-section {
+  left: 115px;
+  top: 287px;
+  width: 508px;
+  height: 84px;
+}
+
+.repayment-section .section-num {
+  top: 0;
+}
+
+.repayment-section .section-label {
+  top: 0;
+}
+
+.locked-hint {
+  left: 31px;
+  top: 30px;
+  width: 479px;
+  height: 30px;
+  line-height: 15px;
+}
+
+.pill {
+  position: absolute;
+  left: 28px;
+  top: 50px;
+  background: #438C8E;
+  color: #012323;
+  padding: 8px 24px;
+  border-radius: 5px;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+/* 4. Message */
+.message-section {
+  left: 115px;
+  top: 391px;
+  width: 415px;
+  height: 121px;
+}
+
+.message-section .section-num {
+  top: 0;
+}
+
+.message-section .section-label {
+  top: 0;
+}
+
+.message-section .hint {
+  left: 31px;
+  top: 30px;
+}
+
+.textarea-message {
+  position: absolute;
+  left: 28px;
+  top: 53px;
+  width: 387px;
+  height: 71px;
+  background: #FFFFFF;
+  border: none;
+  border-radius: 5px;
+  padding: 12px 15px;
+  font-size: 12px;
+  color: #000000;
+  resize: none;
+}
+
+/* Agreement */
+.agreement {
+  position: absolute;
+  left: 115px;
+  top: 555px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  width: 508px;
+}
+
+.checkbox-wrapper {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+}
+
+.checkbox-wrapper input {
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.checkbox-box {
+  position: absolute;
+  inset: 0;
+  background: #012323;
+  border: 2px solid #D9D9D9;
+  border-radius: 5px;
+}
+
+.checkbox-box::after {
+  content: "✓";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  opacity: 0;
+}
+
+.checkbox-wrapper input:checked+.checkbox-box::after {
+  opacity: 1;
+}
+
+.agreement-text {
+  font-size: 16px;
+  color: #E18282;
+  line-height: 19px;
+}
+
+/* Send Button */
+.btn-send {
+  position: absolute;
+  left: 294px;
+  top: 629px;
+  width: 150px;
+  height: 40px;
+  background: #70C1BF;
+  color: #012324;
+  font-weight: 500;
+  font-size: 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-send:hover {
+  background: #5fb0ae;
+}

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Offer Received</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="images/icons/favicon.png">
+
+  <!-- Fonts & Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Your existing styles + contact specific -->
+  <link rel="stylesheet" href="styles/index.css">
+  <link rel="stylesheet" href="styles/header-footer.css">
+     <link rel="stylesheet" href="styles/offer-received.css">
+</head>
+
+<body>
+
+  <!-- Logged-in Header (with avatar + logout) -->
+  <!-- Header -->
+  <div id="headerPlaceholder"></div>
+
+  <!-- every thing else -->
+    <div class="main-container">
+        <!-- Header -->
+        <div class="header">
+            <h1 class="title">Offers You’ve Received</h1>
+            <p class="subtitle">
+                Borrower must pick only <span class="highlight">ONE</span>
+            </p>
+        </div>
+
+        <!-- Scrollable Offers List -->
+        <div class="offers-container">
+            <!-- Offer 1 - Dalia_user -->
+            <div class="offer-card">
+                <div class="lender-header">
+                    <img src="images/Offers_Received_Dalia.png" alt="Dalia" class="lender-avatar">
+                    <div class="lender-info">
+                        <span class="lender-label">Lender Name:</span>
+                        <span class="lender-name">Dalia_user</span>
+                    </div>
+                </div>
+
+                <div class="offer-detail">
+                    <span class="label">Offer Amount</span>
+                    <span class="value">₿12,000</span>
+                </div>
+                <div class="offer-detail">
+                    <span class="label">Interest / Expected Return</span>
+                    <span class="value">10% Interest</span>
+                </div>
+                <div class="offer-detail">
+                    <span class="label">Repayment Plan (Locked)</span>
+                    <span class="value">Installments — Monthly (as you set)</span>
+                </div>
+                <div class="offer-detail message">
+                    <span class="label">Lender Message (optional)</span>
+                    <span class="value">I'm offering this to support you. Best wishes!</span>
+                </div>
+
+                <button class="accept-btn">Accept Offer</button>
+            </div>
+
+            <!-- Offer 2 - Mark_user (15%) -->
+            <div class="offer-card">
+                <div class="lender-header">
+                    <img src="images/Offers_Received_Mark.png" alt="Mark" class="lender-avatar">
+                    <div class="lender-info">
+                        <span class="lender-label">Lender Name:</span>
+                        <span class="lender-name">Mark_user</span>
+                    </div>
+                </div>
+
+                <div class="offer-detail">
+                    <span class="label">Offer Amount</span>
+                    <span class="value">₿12,000</span>
+                </div>
+                <div class="offer-detail">
+                    <span class="label">Interest / Expected Return</span>
+                    <span class="value">15% Interest</span>
+                </div>
+                <div class="offer-detail">
+                    <span class="label">Repayment Plan (Locked)</span>
+                    <span class="value">Installments — Monthly (as you set)</span>
+                </div>
+                <div class="offer-detail message">
+                    <span class="label">Lender Message (optional)</span>
+                    <span class="value">N/A</span>
+                </div>
+
+                <button class="accept-btn">Accept Offer</button>
+            </div>
+
+            <!-- Offer 3 - Another Mark_user (duplicate in screenshot) -->
+            <div class="offer-card">
+                <div class="lender-header">
+                    <img src="images/Offers_Received_Mark.png" alt="Mark" class="lender-avatar">
+                    <div class="lender-info">
+                        <span class="lender-label">Lender Name:</span>
+                        <span class="lender-name">Mark_user</span>
+                    </div>
+                </div>
+
+                <div class="offer-detail">
+                    <span class="label">Offer Amount</span>
+                    <span class="value">₿12,000</span>
+                </div>
+                <div class="offer-detail">
+                    <span class="label">Interest / Expected Return</span>
+                    <span class="value">15% Interest</span>
+                </div>
+                <div class="offer-detail">
+                    <span class="label">Repayment Plan (Locked)</span>
+                    <span class="value">Installments — Monthly (as you set)</span>
+                </div>
+                <div class="offer-detail message">
+                    <span class="label">Lender Message (optional)</span>
+                    <span class="value">N/A</span>
+                </div>
+
+                <button class="accept-btn">Accept Offer</button>
+            </div>
+        </div>
+    </div>
+
+  <!-- Footer -->
+  <div id="footerPlaceholder"></div>
+
+
+  <script src="javascript/header-footer.js"></script>
+    <script src="javascript/offer-received.js"></script>
+</body>
+
+</html>

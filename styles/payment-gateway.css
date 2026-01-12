@@ -1,0 +1,285 @@
+/* GLOBAL SETTINGS */
+body {
+    background-color: #012324;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    margin: 0;
+    padding: 0;
+    /* This makes the footer stick to the bottom */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* CONTAINER - This fills the space between Header and Footer */
+.payment-container {
+    flex-grow: 1; /* Takes up all available space */
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+    align-items: center; /* Centers vertically */
+    padding: 40px 20px; /* Adds space so header/footer don't touch the card */
+}
+
+/* ==================================================== */
+/* EVERYTHING BELOW IS THE SAME AS BEFORE (YOUR CARD)   */
+/* ==================================================== */
+
+.payment-modal {
+    background: #0d3b3b;
+    width: 508px;
+    height: 720px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
+    position: relative;
+    max-height: 90vh; /* Prevents it from getting too tall on small screens */
+    display: flex;
+    flex-direction: column;
+}
+
+/* CLOSE BUTTON */
+.payment-close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 35px;
+    height: 35px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    color: #ffffff;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none; 
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.payment-close-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: rotate(90deg);
+}
+
+/* HEADER AREA */
+.modal-header {
+    padding: 30px 20px 20px;
+    text-align: center;
+}
+
+.modal-header h2 {
+    color: #7dc4bf;
+    font-size: 28px;
+    font-weight: 400;
+    margin: 0 0 25px 0;
+}
+
+.amount-field {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.amount-field label {
+    color: #a8c5c4;
+    font-size: 18px;
+}
+
+.amount-field input {
+    background: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 6px;
+    width: 200px;
+    text-align: center;
+    color: #333;
+}
+
+.payment-method-title {
+    color: #7dc4bf;
+    font-size: 22px;
+    text-align: center;
+    margin-bottom: 15px;
+    font-weight: 400;
+}
+
+/* TAB BUTTONS */
+.payment-tabs {
+    display: flex;
+    width: 100%;
+}
+
+.tab {
+    flex: 1;
+    padding: 15px;
+    background: #0d5252;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    transition: background 0.3s;
+}
+
+.tab.active {
+    background: #5eb5b0;
+}
+
+.tab:hover {
+    background: #4da09b;
+}
+
+/* TAB CONTENT */
+.tab-content {
+    display: none;
+    background: white;
+    padding: 30px 40px 20px;
+    box-sizing: border-box;
+    flex-grow: 1;
+    overflow-y: auto;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* CARD FORM */
+.card-logos {
+    display: flex;
+    justify-content: start;
+    gap: 5px;
+    margin-bottom: 30px;
+}
+
+.card-logos img {
+    height: 38px;
+    width: auto;
+}
+
+.card-form-container {
+    max-width: 428px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.card-form-container input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #d0d0d0;
+    border-radius: 6px;
+    font-size: 15px;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.card-form-container input:focus {
+    border-color: #5eb5b0;
+}
+
+.expiry-cvc-row {
+    display: flex;
+    gap: 15px;
+}
+
+.expiry-cvc-row input {
+    flex: 1;
+}
+
+/* CHECKBOXES */
+.checkbox-group {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 10px;
+    font-size: 13.5px;
+    color: #555;
+}
+
+.checkbox-group input[type="checkbox"] {
+    margin-top: 3px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: #5eb5b0;
+}
+
+.checkbox-group label {
+    cursor: pointer;
+    line-height: 1.4;
+}
+
+.checkbox-group a {
+    color: #000;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+/* MOBILE BANKING GRID */
+.mobile-banking-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    padding: 10px 0;
+}
+
+.mobile-banking-option {
+    background: white;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+    padding: 10px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mobile-banking-option:hover {
+    border-color: #5eb5b0;
+    box-shadow: 0 4px 12px rgba(94, 181, 176, 0.2);
+}
+
+.mobile-banking-option img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+/* PAY BUTTON */
+.pay-button {
+    width: 100%;
+    margin-top: auto;
+    background: #5eb5b0;
+    color: white;
+    border: none;
+    padding: 18px;
+    font-size: 18px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+.pay-button:hover {
+    background: #4da09b;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .payment-modal {
+        width: 100%;
+        height: auto;
+        /* Allow it to be taller than 90vh on mobile if needed, or keep same */
+        border-radius: 0;
+    }
+    
+    .payment-close-btn {
+        top: 20px;
+        right: 20px;
+    }
+}

@@ -1,0 +1,184 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #0a1f2f;
+   
+    
+}
+
+.main-container {
+    width: 740px;
+    margin: auto;
+
+   
+    border: none; 
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+.header {
+    text-align: center;
+    padding: 20px 0 10px;
+    background: #012324;
+    border-radius: 5px 5px 0 0;
+}
+
+.title {
+    width: 359px;
+    margin: 0 auto;
+    color: #70C1BF;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.subtitle {
+    color: #6F8383;
+    font-size: 16px;
+    font-weight: 400;
+    margin-top: 8px;
+}
+
+.highlight {
+    color: #FFF;
+    font-weight: 700;
+}
+
+/* Scrollable Container */
+.offers-container {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 20px 70px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-radius: 5px;
+    background: #012324;
+    scroll-behavior: smooth;
+}
+
+/* SCROLLBAR — COMPLETELY INVISIBLE (NO COLOR EVER) */
+.offers-container::-webkit-scrollbar {
+    width: 12px;
+    background: transparent;
+}
+
+.offers-container::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.offers-container::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 6px;
+}
+
+/* Removed the hover effect completely — no color appears */
+
+/* Offer Card */
+.offer-card {
+    
+    background: #0E4D4E;
+    border-radius: 5px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.lender-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.lender-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.lender-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #FFF;
+}
+
+.lender-label {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.lender-name {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.offer-detail {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    line-height: 1.4;
+}
+
+.offer-detail .label {
+    color: #FFF;
+    font-weight: 700;
+    font-size: 16px;
+    width: 210px;
+    flex-shrink: 0;
+}
+
+.offer-detail .value {
+    color: #B0C4C4;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-align: left;
+    width: 304px;
+    margin-left: auto;
+}
+
+.offer-detail.message .value {
+    font-style: italic;
+    white-space: normal;
+    line-height: 1.5;
+}
+
+.offer-detail.message {
+    margin-top: 4px;
+    align-items: flex-start;
+}
+
+/* ONLY THIS BLOCK CHANGED — Accept Offer button exactly as you specified */
+.accept-btn {
+    padding: 8px 10px 8px 10px;
+    border-radius: 5px;
+    background: #4CAF50;
+    color: #FFF;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.accept-btn:hover {
+    background: #45a049;
+}

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - Anchor</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="images/icons/favicon.png">
+
+  <!-- Fonts & Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Your existing styles + contact specific -->
+  <link rel="stylesheet" href="styles/index.css">
+  <link rel="stylesheet" href="styles/header-footer.css">
+   <link rel="stylesheet" href="styles/offer-form.css">
+</head>
+
+<body>
+
+  <!-- Logged-in Header (with avatar + logout) -->
+  <!-- Header -->
+  <div id="headerPlaceholder"></div>
+
+  <!-- every thing else -->
+
+
+
+  <div class="hero">
+    <div class="form">
+
+      <!-- Title -->
+      <h1 class="title">Make an offer to support this borrower.</h1>
+      <p class="subtitle">You can choose how much you want to lend and set your preferred repayment terms.</p>
+
+      <form id="offerForm">
+
+        <!-- 1. Offer Amount -->
+        <div class="section amount-section">
+          <label class="section-num">1.</label>
+          <label class="section-label">Offer Amount</label>
+          <p class="hint">Amount you want to lend</p>
+          <input type="number" class="input-amount" placeholder="e.g. 5000" required>
+        </div>
+
+        <!-- 2. Expected Return / Interest -->
+        <div class="section interest-section">
+          <label class="section-num">2.</label>
+          <label class="section-label">Expected Return / Interest</label>
+          <div class="interest-wrapper">
+            <select class="select-interest">
+              <option>Interest rate</option>
+              <option>5%</option>
+              <option>8%</option>
+              <option>10%</option>
+              <option>12%</option>
+            </select>
+            <div class="custom-group">
+              <span class="custom-text">Custom</span>
+              <input type="text" class="input-custom">
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Repayment Plan -->
+        <div class="section repayment-section">
+          <label class="section-num">3.</label>
+          <label class="section-label">Repayment Plan</label>
+          <p class="hint locked-hint">The repayment plan is set by the borrower. This field is locked and cannot be edited.</p>
+          <div class="pill">Installments</div>
+        </div>
+
+        <!-- 4. Message -->
+        <div class="section message-section">
+          <label class="section-num">4.</label>
+          <label class="section-label">Message to Borrower (optional)</label>
+          <p class="hint">Write a short message to the borrower</p>
+          <textarea class="textarea-message">I'm offering this amount to support you. Best wishes.</textarea>
+        </div>
+
+        <!-- Agreement -->
+        <div class="agreement">
+          <label class="checkbox-wrapper">
+            <input type="checkbox" required>
+            <span class="checkbox-box"></span>
+          </label>
+          <p class="agreement-text">
+            I agree to lend this amount responsibly and understand that this offer will be visible to the borrower.
+          </p>
+        </div>
+
+        <button type="submit" class="btn-send">Send</button>
+      </form>
+
+    </div>
+  </div>
+
+
+
+
+
+  <!-- Footer -->
+  <div id="footerPlaceholder"></div>
+
+
+  <script src="javascript/header-footer.js"></script>
+</body>
+
+</html>

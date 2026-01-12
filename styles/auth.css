@@ -1,0 +1,127 @@
+.auth-hero {
+  background: var(--bg-dark);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 5rem 5%;
+  color: white;
+}
+
+.auth-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6rem;
+}
+
+.auth-text {
+  margin-bottom: 200px;
+}
+
+.auth-text h1 {
+  font-size: 4.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.auth-text p {
+  font-size: 1.3rem;
+  opacity: 0.9;
+  line-height: 1.7;
+}
+
+.auth-text .tagline {
+  color: var(--primary);
+  font-weight: 500;
+  margin-top: 1rem;
+  font-size: 1.1rem;
+}
+
+.auth-form-container {
+  width: 420px;
+}
+
+.auth-form {
+  background: #70C1BF;
+  padding: 3rem 2.5rem;
+  border-radius: 5px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+  color: var(--text-dark);
+
+  border-radius: 5px;
+
+
+}
+
+.auth-form h2 {
+  font-size: 2.2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: var(--bg-dark);
+}
+
+.auth-form input {
+  width: 100%;
+  padding: 1rem 1.3rem;
+  margin-bottom: 1rem;
+  border: none;
+  border-radius: 10px;
+  background: white;
+  font-size: 1rem;
+  box-shadow: inset 0 2px 8px rgba(0,0,0,0.05);
+
+  
+
+}
+
+.auth-form input:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 212, 194, 0.3);
+}
+
+.auth-form .btn-primary {
+  background-color: var(--bg-dark);
+  color: var(--primary);
+  width: 100%;
+  padding: 1.1rem;
+  margin-top: 0.5rem;
+  font-size: 1.3rem;
+  font-weight: bold;
+
+  border: none;
+  border-radius: 10px;
+}
+
+.switch-text {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.switch-text a {
+  color: var(--text-dark);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.switch-text a:hover {
+  text-decoration: underline;
+}
+
+/* Mobile */
+@media (max-width: 968px) {
+  .auth-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 4rem;
+  }
+
+  .auth-text {
+  margin-bottom: 0px;
+}
+  .auth-text h1 { font-size: 3.5rem; }
+  .auth-form-container { width: 100%; max-width: 420px; }
+}
+
+

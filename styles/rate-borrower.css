@@ -1,0 +1,352 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body { 
+  background: #0a1f2f;
+  min-height: 100vh;
+  margin: 0;
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero {
+  width: 739px;
+  min-height: 900px;
+  border-radius: 5px;
+  padding: 1px;
+  margin: 40px auto;
+  border-style: none;
+}
+
+.form {
+  width: 100%;
+  min-height: 900px;
+  background: #0a1f2f;
+  padding: 48px 80px 60px;
+  position: relative;
+  color: white;
+}
+
+/* === TITLE === */
+.title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 29px;
+  width: 505px;
+  height: 30px;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 30px;
+  text-align: center;
+  color: #70C1BF;
+}
+
+/* === USER PROFILE === */
+.user-profile {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 90px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.user-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border-color: white;
+  border-width: 1px;
+  border-style: solid;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.user-name {
+  font-weight: 400;
+  font-size: 16px;
+  color: white;
+  margin: 0;
+}
+
+.user-rating {
+  font-size: 14px;
+  color: white;
+  margin: 0;
+}
+
+/* === SECTIONS === */
+.section {
+  position: absolute;
+  left: 115px;
+}
+
+.section-title {
+  font-weight: 700;
+  font-size: 20px;
+  color: white;
+  margin-bottom: 15px;
+}
+
+/* === BORROWER HISTORY === */
+.history-section {
+  top: 200px;
+  width: 508px;
+}
+
+.history-item {
+  font-size: 14px;
+  color: #B1C7CB;
+  margin: 8px 0;
+  margin-left: 20px;
+}
+
+/* === CATEGORY RATINGS === */
+.ratings-section {
+  top: 330px;
+  width: 508px;
+}
+
+.ratings-container {
+  display: flex;
+  gap: 40px;
+  margin-top: 20px;
+}
+
+.rating-guide {
+  flex-shrink: 0;
+}
+
+.guide-title {
+  font-weight: 600;
+  font-size: 14px;
+  color: #70C1BF;
+  margin-bottom: 12px;
+}
+
+.guide-item {
+  font-size: 12px;
+  color: #6F8383;
+  margin: 6px 0;
+}
+
+.rating-categories {
+  flex-grow: 1;
+}
+
+.rating-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.rating-label {
+  font-size: 14px;
+  color: white;
+}
+
+.stars {
+  display: flex;
+  gap: 5px;
+}
+
+.stars i {
+  color: #6F8383;
+  font-size: 16px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.stars i.fa-solid {
+  color: #70C1BF;
+}
+
+.stars .fa-regular {
+  color: #6F8383;
+}
+
+.stars i:hover {
+  transform: scale(1.1);
+}
+
+.total-rating {
+  margin-top: 15px;
+  text-align: right;
+}
+
+.total-text {
+  font-weight: 600;
+  font-size: 14px;
+  color: #70C1BF;
+}
+
+/* === YOUR EXPERIENCE === */
+.experience-section {
+  top: 560px;
+  width: 508px;
+}
+
+.textarea-experience {
+  width: 100%;
+  height: 80px;
+  background: #D9D9D9;
+  border: none;
+  border-radius: 5px;
+  padding: 12px 15px;
+  font-size: 12px;
+  color: #6F8383;
+  resize: none;
+  margin-top: 10px;
+}
+
+.textarea-experience::placeholder {
+  color: #6F8383;
+}
+
+/* === RECOMMENDATION === */
+.recommendation-section {
+  top: 710px;
+  width: 508px;
+}
+
+.recommendation-hint {
+  font-size: 12px;
+  color: #6F8383;
+  margin: 8px 0 15px 0;
+}
+
+.recommendation-options {
+  display: flex;
+  gap: 30px;
+  margin-left: 20px;
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.radio-label {
+  font-size: 14px;
+  color: white;
+  order: -1;
+}
+
+.radio-option input {
+  display: none;
+}
+
+.radio-box {
+  width: 24px;
+  height: 24px;
+  background: #D9D9D9;
+  border-radius: 3px;
+  position: relative;
+  display: inline-block;
+}
+
+.radio-box::after {
+  content: "✓";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #012324;
+  font-weight: bold;
+  font-size: 16px;
+  opacity: 0;
+}
+
+.radio-option input:checked + .radio-box::after {
+  opacity: 1;
+}
+
+/* === CONFIRMATION === */
+.confirmation {
+  position: absolute;
+  left: 115px;
+  top: 850px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  width: 508px;
+}
+
+.checkbox-wrapper {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.checkbox-wrapper input {
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  position: absolute;
+}
+
+.checkbox-box {
+  position: absolute;
+  inset: 0;
+  background: #D9D9D9;
+  border-radius: 3px;
+}
+
+.checkbox-box::after {
+  content: "✓";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #012324;
+  font-weight: bold;
+  font-size: 16px;
+  opacity: 0;
+}
+
+.checkbox-wrapper input:checked + .checkbox-box::after {
+  opacity: 1;
+}
+
+.confirmation-text {
+  font-size: 14px;
+  color: #E18282;
+  line-height: 19px;
+}
+
+/* === SUBMIT BUTTON === */
+.btn-submit {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 900px;
+  width: 280px;
+  height: 45px;
+  background: #70C1BF;
+  color: #012324;
+  font-weight: 500;
+  font-size: 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-submit:hover {
+  background: #5fb0ae;
+}

@@ -1,0 +1,169 @@
+/* ===================================================================
+   styles/global.css
+   GLOBAL STYLES – loaded on every page
+   • Root variables
+   • Reset
+   • <header> and <footer> (real semantic tags)
+   • Shared components (buttons, nav, etc.)
+   =================================================================== */
+
+:root {
+  --bg-dark: #0f242e;
+  --primary: #00d4c2;
+  --text-light: rgba(255, 255, 255, 0.75);
+   font-family: 'Roboto', sans-serif;
+}
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ====================== HEADER ====================== */
+header {
+  background: var(--bg-dark);
+  color: white;
+  padding: 1rem 5%;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 5%;
+  right: 5%;
+  height: 1px;
+  background-color: var(--primary);
+}
+
+.nav-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  object-fit: contain;
+}
+
+.logo:hover .logo-icon {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 8px #00d4c2);
+}
+
+nav ul {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  border-bottom: 2px solid transparent;
+  padding-bottom: 4px;
+  transition: color 0.3s ease, border-bottom-color 0.3s ease;
+}
+
+nav a:hover,
+nav a.active {
+  color: var(--primary);
+  border-bottom-color: var(--primary);
+}
+
+.user-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Buttons – logged out */
+.login-btn, .signup-btn, .logout-btn {
+  padding: 0.6rem 1.4rem;
+  border-radius: 50px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all .3s;
+}
+
+.login-btn {
+  background: var(--primary);
+  color: var(--bg-dark);
+  border: none;
+}
+
+.login-btn:hover {
+  background: var(--bg-dark);
+  color: var(--primary);
+  border: 1px solid var(--primary);
+}
+
+.signup-btn {
+  background: transparent;
+  color: white;
+  border: 1px solid var(--primary);
+}
+
+.signup-btn:hover {
+  background: var(--primary);
+  color: var(--bg-dark);
+}
+
+/* Logged in */
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  background: rgba(0,212,194,0.15);
+  padding: 0.5rem 1rem 0.5rem 0.5rem;
+  border-radius: 50px;
+  font-weight: 500;
+}
+
+.user-avatar-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid var(--primary);
+  object-fit: cover;
+}
+
+.logout-btn {
+  background: var(--primary);
+  color: var(--bg-dark);
+  border: none;
+}
+
+.logout-btn:hover {
+  background: #00b8a9;
+  transform: translateY(-2px);
+}
+
+/* ====================== FOOTER ====================== */
+footer {
+  background: var(--bg-dark);
+  color: var(--text-light);
+  text-align: center;
+  padding: 2rem;
+  font-size: 0.9rem;
+  margin-top: auto;
+}

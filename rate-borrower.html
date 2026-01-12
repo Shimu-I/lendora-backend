@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rate The Borrower - Anchor</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="images/icons/favicon.png">
+
+  <!-- Fonts & Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="styles/index.css">
+  <link rel="stylesheet" href="styles/header-footer.css">
+  <link rel="stylesheet" href="styles/rate-borrower.css">
+</head>
+
+<body>
+
+  <!-- Header -->
+  <div id="headerPlaceholder"></div>
+
+  <!-- Main Content -->
+  <div class="hero">
+    <div class="form">
+
+      <!-- Title -->
+      <h1 class="title">Rate The Borrower</h1>
+
+      <!-- User Profile Section -->
+      <div class="user-profile">
+        <img src="images/user-avatar.jpg" alt="User Avatar" class="user-avatar">
+        <div class="user-info">
+          <h2 class="user-name">User Name: Elli_user</h2>
+          <p class="user-rating">4.5 (120 reviews)</p>
+        </div>
+      </div>
+
+      <form id="ratingForm">
+
+        <!-- Borrower History -->
+        <div class="section history-section">
+          <h3 class="section-title">Borrower History</h3>
+          <p class="history-item">3 loans repaid on time</p>
+          <p class="history-item">Borrowed 5 times</p>
+        </div>
+
+        <!-- Category Ratings -->
+        <div class="section ratings-section">
+          <h3 class="section-title">Category Ratings</h3>
+          
+          <div class="ratings-container">
+            <!-- Rating Guide -->
+            <div class="rating-guide">
+              <h4 class="guide-title">Rating Guide</h4>
+              <p class="guide-item">1★ = Very Poor</p>
+              <p class="guide-item">2★ = Poor</p>
+              <p class="guide-item">3★ = Average</p>
+              <p class="guide-item">4★ = Good</p>
+              <p class="guide-item">5★ = Excellent</p>
+            </div>
+
+            <!-- Rating Categories -->
+            <div class="rating-categories">
+              <!-- Timely Payment -->
+              <div class="rating-row">
+                <label class="rating-label">Timely Payment</label>
+                <div class="stars" data-category="timely">
+                  <i class="fa-regular fa-star" data-rating="1"></i>
+                  <i class="fa-regular fa-star" data-rating="2"></i>
+                  <i class="fa-regular fa-star" data-rating="3"></i>
+                  <i class="fa-regular fa-star" data-rating="4"></i>
+                  <i class="fa-regular fa-star" data-rating="5"></i>
+                </div>
+              </div>
+
+              <!-- Communication -->
+              <div class="rating-row">
+                <label class="rating-label">Communication</label>
+                <div class="stars" data-category="communication">
+                  <i class="fa-regular fa-star" data-rating="1"></i>
+                  <i class="fa-regular fa-star" data-rating="2"></i>
+                  <i class="fa-regular fa-star" data-rating="3"></i>
+                  <i class="fa-regular fa-star" data-rating="4"></i>
+                  <i class="fa-regular fa-star" data-rating="5"></i>
+                </div>
+              </div>
+
+              <!-- Trustworthy -->
+              <div class="rating-row">
+                <label class="rating-label">Trustworthy</label>
+                <div class="stars" data-category="trustworthy">
+                  <i class="fa-regular fa-star" data-rating="1"></i>
+                  <i class="fa-regular fa-star" data-rating="2"></i>
+                  <i class="fa-regular fa-star" data-rating="3"></i>
+                  <i class="fa-regular fa-star" data-rating="4"></i>
+                  <i class="fa-regular fa-star" data-rating="5"></i>
+                </div>
+              </div>
+
+              <!-- Agreement Followed -->
+              <div class="rating-row">
+                <label class="rating-label">Agreement Followed</label>
+                <div class="stars" data-category="agreement">
+                  <i class="fa-regular fa-star" data-rating="1"></i>
+                  <i class="fa-regular fa-star" data-rating="2"></i>
+                  <i class="fa-regular fa-star" data-rating="3"></i>
+                  <i class="fa-regular fa-star" data-rating="4"></i>
+                  <i class="fa-regular fa-star" data-rating="5"></i>
+                </div>
+              </div>
+
+              <!-- Total Rating -->
+              <div class="total-rating">
+                <span class="total-text" id="totalRating">Total Rating: 0/20</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Your Experience -->
+        <div class="section experience-section">
+          <label class="section-title">Your Experience</label>
+          <textarea class="textarea-experience" placeholder="write your experience in here"></textarea>
+        </div>
+
+        <!-- Recommendation -->
+        <div class="section recommendation-section">
+          <label class="section-title">Recommendation</label>
+          <p class="recommendation-hint">Would you recommend this borrower?</p>
+          
+          <div class="recommendation-options">
+            <label class="radio-option">
+              <span class="radio-label">Yes</span>
+              <input type="radio" name="recommend" value="yes">
+              <span class="radio-box"></span>
+            </label>
+            <label class="radio-option">
+              <span class="radio-label">No</span>
+              <input type="radio" name="recommend" value="no" checked>
+              <span class="radio-box"></span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Confirmation -->
+        <div class="confirmation">
+          <label class="checkbox-wrapper">
+            <input type="checkbox" checked required>
+            <span class="checkbox-box"></span>
+          </label>
+          <p class="confirmation-text">
+            I confirm that the information provided is accurate.
+          </p>
+        </div>
+
+        <button type="submit" class="btn-submit">Submit</button>
+      </form>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div id="footerPlaceholder"></div>
+
+  <script src="javascript/header-footer.js"></script>
+  <script>
+    // Star Rating System
+    const ratings = {
+      timely: 0,
+      communication: 0,
+      trustworthy: 0,
+      agreement: 0
+    };
+
+    // Get all star containers
+    const starContainers = document.querySelectorAll('.stars');
+
+    starContainers.forEach(container => {
+      const category = container.getAttribute('data-category');
+      const stars = container.querySelectorAll('i');
+
+      stars.forEach((star, index) => {
+        // Click to rate
+        star.addEventListener('click', function() {
+          const rating = parseInt(this.getAttribute('data-rating'));
+          ratings[category] = rating;
+
+          // Update stars visual
+          stars.forEach((s, i) => {
+            if (i < rating) {
+              s.classList.remove('fa-regular');
+              s.classList.add('fa-solid');
+            } else {
+              s.classList.remove('fa-solid');
+              s.classList.add('fa-regular');
+            }
+          });
+
+          // Update total rating
+          updateTotalRating();
+        });
+
+        // Hover effect
+        star.addEventListener('mouseenter', function() {
+          const rating = parseInt(this.getAttribute('data-rating'));
+          stars.forEach((s, i) => {
+            if (i < rating) {
+              s.style.color = '#5fb0ae';
+            }
+          });
+        });
+
+        container.addEventListener('mouseleave', function() {
+          stars.forEach((s, i) => {
+            if (i < ratings[category]) {
+              s.style.color = '#70C1BF';
+            } else {
+              s.style.color = '#6F8383';
+            }
+          });
+        });
+      });
+    });
+
+    function updateTotalRating() {
+      const total = ratings.timely + ratings.communication + ratings.trustworthy + ratings.agreement;
+      document.getElementById('totalRating').textContent = `Total Rating: ${total}/20`;
+    }
+  </script>
+</body>
+
+</html>

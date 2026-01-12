@@ -1,0 +1,137 @@
+/* Page fade animation */
+body {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+body.fade-in {
+  opacity: 1;
+}
+
+
+.contact-hero {
+  background: var(--bg-dark); 
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem 5%;
+  color: white;
+}
+
+.contact-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8rem;
+}
+
+.contact-text h1 {
+  font-size: 4.5rem;
+  color: var(--primary);
+  margin-bottom: 3rem;
+  font-weight: 700;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 1.1rem 1.4rem;
+  margin-bottom: 1.5rem;
+  border: none;
+  border-radius: 5px;
+  background: rgba(224, 247, 245, 0.95);
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.1rem;
+  color: var(--text-dark);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+  color: #94a3b8;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(0, 212, 194, 0.3);
+}
+
+.contact-form .btn-primary {
+  width: 100%;
+  padding: 1.1rem;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  border: none;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.contact-image img {
+  width: 580px;
+  max-width: 100%;
+  
+}
+
+/* Logged-in User Profile in Header */
+.user-section.logged-in {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  background: rgba(0, 212, 194, 0.15);
+  padding: 0.4rem 0.9rem;
+  padding-right: 1.2rem;
+  border-radius: 50px;
+  color: white;
+  font-weight: 500;
+}
+
+.user-profile img {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 2px solid var(--primary);
+}
+
+.logout-btn {
+  background: var(--primary);
+  color: var(--bg-dark);
+  border: none;
+  padding: 0.6rem 1.4rem;
+  border-radius: 50px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.logout-btn:hover {
+  background: #00b8a9;
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .contact-container {
+    flex-direction: column;
+    
+    text-align: center;
+    gap: 4rem;
+  }
+  .contact-text h1 { font-size: 3.5rem; }
+  .contact-image img { width: 450px; }
+}
+
+@media (max-width: 576px) {
+  .contact-text h1 { font-size: 3rem; }
+  .contact-image img { width: 320px; }
+}

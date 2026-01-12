@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page Title - Anchor</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="images/icons/favicon.png">
+
+  <!-- Fonts & Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Main Styles -->
+  <link rel="stylesheet" href="styles/index.css" />
+  <link rel="stylesheet" href="styles/header-footer.css">
+  <link rel="stylesheet" href="styles/funding.css" />
+  <link rel="stylesheet" href="styles/payment-gateway.css" />
+
+  <!-- Add page-specific CSS here if needed -->
+  <!-- <link rel="stylesheet" href="styles/dashboard.css"> -->
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <div id="headerPlaceholder"></div>
+
+  <!-- Main Section -->
+  <main>
+    <div class="hero-text">
+      <h1>Bringing hope closer with <strong>accessible, trusted, and people-powered</strong> support.</h1>
+      <p>Discover stories that need your support or share yours with the community.</p>
+    </div>
+
+    <div class="search-bar">
+      <i class="fas fa-search"></i>
+      <input type="text" placeholder="Search here" id="searchInput">
+    </div>
+
+    <div class="filters">
+      <button class="filter-btn active" data-filter="all">ALL</button>
+      <button class="filter-btn" data-filter="flood">Flood Relief</button>
+      <button class="filter-btn" data-filter="clothes">Clothes Distribution</button>
+      <button class="filter-btn" data-filter="accidents">Accidents</button>
+      <button class="filter-btn" data-filter="emergency">Emergency</button>
+      <select id="sortSelect">
+        <option>Sort recent</option>
+      </select>
+    </div>
+
+    <a href="funding-interface-form.html" class="create-post">
+      Create your post
+    </a>
+
+
+    <div class="posts-container" id="postsGrid">
+
+      <!-- Post 1 -->
+      <div class="card" data-filter="flood">
+        <img src="/images/flood-dummy.png" alt="Emergency Aid for Flood Victims">
+        <div class="card-content">
+          <div class="tag-date-row">
+            <span class="tag">Flood Relief</span>
+            <span class="date">Posted on 12 Feb, 2025</span>
+          </div>
+          <h3>Emergency Aid for Flood Victims</h3>
+          <p>Right now, children are wading through waist-deep water with nothing but the clothes on their backs.
+            Families have lost their homes overnight. Your donation provides emergency food packs, clean water,
+            medicine...</p>
+          <div class="progress-container">
+            <div class="goal-amount">฿12,500</div>
+            <div class="progress">
+              <div class="progress-fill" style="width: 52%;"></div>
+            </div>
+            <div class="raised-amount">฿6,500</div>
+          </div>
+          <div class="actions">
+
+            <a href="payment-gateway.html" class="donate-btn">Donate</a>
+
+            <a href="funding-view.html" class="view-btn">View</a>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Post 2 -->
+      <div class="card" data-filter="clothes">
+        <img src="/images/cloth-dummy.png" alt="Winter Clothing Distribution for Families in Need">
+        <div class="card-content">
+          <div class="tag-date-row">
+            <span class="tag">Clothes Distribution</span>
+            <span class="date">Posted on 2 Oct, 2025</span>
+          </div>
+          <h3>Winter Clothing Distribution for Families in Need</h3>
+          <p>Winter is here and thousands of families have no warm clothes or blankets. We're distributing jackets,
+            sweaters, blankets, and children's clothes to the poorest communities. Even 200 baht can keep one...</p>
+          <div class="progress-container">
+            <div class="goal-amount">฿52,500</div>
+            <div class="progress">
+              <div class="progress-fill" style="width: 38%;"></div>
+            </div>
+            <div class="raised-amount">฿20,000</div>
+          </div>
+          <div class="actions">
+            <a href="payment-gateway.html" class="donate-btn">Donate</a>
+
+            <a href="funding-view.html" class="view-btn">View</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Post 3 -->
+      <div class="card" data-filter="accidents">
+        <img src="/images/dummy-fund.png" alt="Emergency Fire Relief for Affected Families">
+        <div class="card-content">
+          <div class="tag-date-row">
+            <span class="tag">Accidents</span>
+            <span class="date">Posted on 12 April, 2025</span>
+          </div>
+          <h3>Emergency Fire Relief for Affected Families</h3>
+          <p>Last night a huge fire destroyed over 50 homes in minutes. Families escaped with nothing and now have no
+            food, clothes or roof. We are bringing food, water, blankets and medicine today. Every...</p>
+          <div class="progress-container">
+            <div class="goal-amount">฿50,000</div>
+            <div class="progress">
+              <div class="progress-fill" style="width: 81%;"></div>
+            </div>
+            <div class="raised-amount">฿40,500</div>
+          </div>
+          <div class="actions">
+
+            <a href="payment.html?amount=2000" class="donate-btn">Donate</a>
+
+            <a href="funding-view.html" class="view-btn">View</a>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+
+
+
+
+  <!-- FOOTER -->
+  <div id="footerPlaceholder"></div>
+
+  <!-- Load Header + Footer (and logout function) -->
+  <script src="javascript/header-footer.js"></script>
+  <script src="javascript/funding.js"></script>
+
+
+
+</body>
+
+</html>

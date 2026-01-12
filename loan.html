@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page Title - Anchor</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="images/icons/favicon.png">
+
+  <!-- Fonts & Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <!-- Main Styles -->
+  <link rel="stylesheet" href="styles/index.css" />
+  <link rel="stylesheet" href="styles/header-footer.css">
+  <link rel="stylesheet" href="styles/loan.css" />
+  <!-- Add page-specific CSS here if needed -->
+  <!-- <link rel="stylesheet" href="styles/dashboard.css"> -->
+</head>
+
+<body>
+  <!-- HEADER -->
+  <div id="headerPlaceholder"></div>
+
+  <!-- Main Section -->
+  <main>
+    <div class="hero-text">
+      <h1>Empowering you with <strong>accessible, transparent, and community-backed loans</strong>.</h1>
+      <p>Search for loan categories or create a new request to get started.</p>
+    </div>
+
+    <div class="search-bar">
+      <i class="fas fa-search"></i>
+      <input type="text" placeholder="Search here" id="searchInput">
+    </div>
+
+    <div class="filters">
+      <button class="filter-btn active" data-filter="all">ALL</button>
+      <button class="filter-btn" data-filter="flood">Flood Relief</button>
+      <button class="filter-btn" data-filter="clothes">Clothes Distribution</button>
+      <button class="filter-btn" data-filter="accidents">Accidents</button>
+      <button class="filter-btn" data-filter="emergency">Emergency</button>
+      <select id="sortSelect">
+        <option>Sort recent</option>
+      </select>
+    </div>
+
+   <a href="loan-request-form.html" class="request-loan">
+  Request for a loan
+</a>
+
+
+    <!-- Loan Cards -->
+    <div class="loans-container">
+
+      <!-- Card 1 -->
+      <article class="loan-card">
+        <div class="card-header">
+          <img src="https://via.placeholder.com/50x50/2563eb/ffffff?text=E" alt="User" class="avatar">
+          <h3>User Name: Elli_user</h3>
+        </div>
+
+        <div class="loan-info">
+          <p><span class="label">Category:</span> <span class="tag">College</span></p>
+          <p><span class="label">Reason:</span> My family is currently facing a critical situation, especially
+            financial. The main earning member of our family was recently involved in accident, and as a result, our
+            financial condition has become...</p>
+          <p><span class="label">Amount needed:</span> 5000 taka</p>
+          <p><span class="label">Loan duration:</span> 5 months</p>
+          <p><span class="label">Repayment option:</span> Installments</p>
+          <p><span class="label">Given document:</span> Academic Registration Invoice</p>
+        </div>
+
+       
+
+        <div class="card-footer">
+          <div class="actions">
+        
+                 
+            <a href="" class="btn-rating" style="background-color: rgba(220, 70, 80, 0.241); color: rgba(255, 255, 255, 0.47);">Submit Rating</a>
+            <a href="" class="btn-offer" style="background-color: #f5b80077; color: rgba(0, 0, 0, 0.437);">Make Offer</a>
+          </div>
+          <div class="stats">Accepted: 0 &nbsp;&nbsp; Response: 3</div>
+        </div>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="loan-card">
+        <div class="card-header">
+          <img src="https://via.placeholder.com/50x50/dc3545/ffffff?text=D" alt="User" class="avatar">
+          <h3>User Name: David_Miller</h3>
+        </div>
+
+        <div class="loan-info">
+          <p><span class="label">Category:</span> <span class="tag">Business</span></p>
+          <p><span class="label">Reason:</span> I am in the process of starting a small clothing business and
+            require investment to begin operations. This business will help me support and provide for my family.
+          </p>
+          <p><span class="label">Amount needed:</span> 10000 taka</p>
+          <p><span class="label">Loan duration:</span> 5 months</p>
+          <p><span class="label">Repayment option:</span> Installments</p>
+          <p><span class="label">Given document:</span> Business License</p>
+        </div>
+
+       
+
+        <div class="card-footer">
+          <div class="actions">
+           
+            
+            <a href="rate-borrower.html" class="btn-rating">Submit Rating</a>
+            <a href="offer-form.html" class="btn-offer">Make Offer</a>
+           
+          </div>
+          <div class="stats">Accepted: 1 &nbsp;&nbsp; Response: 5</div>
+        </div>
+      </article>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <div id="footerPlaceholder"></div>
+
+  <!-- Load Header + Footer (and logout function) -->
+  <script src="javascript/header-footer.js"></script>
+  <script src="javascript/loan.js"></script>
+  
+</body>
+</html>

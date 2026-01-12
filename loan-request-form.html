@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Request Form</title>
+    <link rel="stylesheet" href="/styles/loan-request-form.css">
+    <link rel="stylesheet" href="styles/index.css">
+    <link rel="stylesheet" href="styles/header-footer.css">
+</head>
+<body>
+    <!-- Header -->
+    <div id="headerPlaceholder"></div>
+
+    <div class="container">
+        <h1>Loan Request Form</h1>
+        
+        <form id="loanRequestForm">
+            <!-- Category -->
+            <div class="form-group category-section">
+                <label class="category-label">Category</label>
+                <div class="category-buttons">
+                    <button type="button" class="category-btn" data-category="accidents">Accidents</button>
+                    <button type="button" class="category-btn" data-category="flood">Flood Relief</button>
+                    <button type="button" class="category-btn" data-category="clothes">Clothes Distribution</button>
+                    <button type="button" class="category-btn" data-category="other">Other</button>
+                    <button type="button" class="category-btn" data-category="emergency">Emergency</button>
+                    <button type="button" class="category-btn" data-category="custom">Custom</button>
+                    <input type="text" id="customCategory" class="custom-input" placeholder="type...">
+                </div>
+            </div>
+
+            <!-- 1. Amount Needed -->
+            <div class="form-group amount-section">
+                <label class="section-label">1. Amount Needed</label>
+                <input type="number" id="amountNeeded" placeholder="Enter amount" required>
+            </div>
+
+            <!-- 2. Loan Duration -->
+            <div class="form-group duration-section">
+                <label class="section-label">2. Loan Duration</label>
+                <div class="duration-options">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="duration" value="1" checked>
+                        <span>1 month</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="duration" value="3">
+                        <span>3 months</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="duration" value="6">
+                        <span>6 months</span>
+                    </label>
+                    <label class="checkbox-label custom-duration">
+                        <input type="checkbox" name="duration" value="custom">
+                        <span>Custom</span>
+                    </label>
+                    <input type="text" id="customDuration" class="custom-input" placeholder="type">
+                </div>
+            </div>
+
+            <!-- 3. Repayment Option -->
+            <div class="form-group repayment-section">
+                <label class="section-label">3. Repayment Option</label>
+                <div class="repayment-options">
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="repayment" value="installments" checked>
+                        <span>Installments</span>
+                    </label>
+                    <label class="checkbox-label">
+                        <input type="checkbox" name="repayment" value="onetime">
+                        <span>One-time payment</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 4. Reason for Loan -->
+            <div class="form-group reason-section">
+                <label class="section-label">4. Reason for Loan</label>
+                <textarea id="reason" rows="5" placeholder="Explain why you need this loan. Describe your situation clearly so lenders can understand your condition." required></textarea>
+            </div>
+
+            <!-- 5. Proof Documents -->
+            <div class="form-group proof-section">
+                <label class="section-label">5. Proof Documents</label>
+                <p class="helper-text">Upload Supporting Document<br>(Photo/PDF allowed)</p>
+                
+                <div class="examples-box">
+                    <p class="examples-title">Examples:</p>
+                    <ul class="examples-list">
+                        <li>Hospital invoice</li>
+                        <li>Academic registration paper</li>
+                        <li>Business cost breakdown</li>
+                        <li>Repair bill</li>
+                        <li>Income verification</li>
+                    </ul>
+                </div>
+                
+                <p class="upload-instruction">Upload Image<br>(For showing receipts or related proof images)</p>
+                
+                <button type="button" class="upload-btn">Upload 📤</button>
+                <input type="file" id="proofUpload" multiple hidden accept="image/*,.pdf">
+            </div>
+
+            <!-- Confirmation -->
+            <div class="form-group confirmation-section">
+                <label class="checkbox-label confirmation">
+                    <input type="checkbox" id="confirmation" required>
+                    <span class="confirmation-text">I confirm that all the information provided in this loan request is true, and all uploaded documents are authentic. I understand that providing false information may result in account suspension.</span>
+                </label>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <div id="footerPlaceholder"></div>
+    
+    <script src="javascript/header-footer.js"></script>
+    <script src="/javascript/loan-request-form.js"></script>
+</body>
+</html>

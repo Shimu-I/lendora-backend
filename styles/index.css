@@ -1,0 +1,366 @@
+html {
+  scroll-behavior: auto;
+}
+
+html.scroll-smooth {
+  scroll-behavior: smooth !important;
+}
+
+:root {
+  --bg-dark: #0a1f2f;
+  --bg-light: #f8fffe;
+  --primary: #00d4c2;
+  --text-light: #e0f7f5;
+  --text-dark: #0a1f2f;
+  --gray: #94a3b8;
+}
+
+* { margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; 
+}
+
+body { 
+  font-family: 'Roboto', sans-serif; 
+  line-height: 1.6; 
+  color: var(--text-dark); 
+  transition: scroll-behavior 0s 0.3s;
+}
+
+.nav-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+ 
+  
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 10px;            
+}
+
+.logo-icon {
+  width: 36px;               
+  height: 36px;
+  border-radius: 6px;          
+  object-fit: contain;
+}
+
+
+.logo:hover .logo-icon {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 8px #00d4c2);
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2),
+           only screen and (min--moz-device-pixel-ratio: 2),
+           only screen and (min-device-pixel-ratio: 2) {
+      link[rel="icon"][sizes="32x32"] { image-rendering: -webkit-optimize-contrast; }
+    }
+
+
+    @media (hover: hover) {
+      body:hover ~ head link[rel="icon"] {
+        filter: drop-shadow(0 0 8px #00d4c2);
+      }
+    }
+
+nav ul {
+  display: flex;
+  gap: 2.5rem;
+  list-style: none;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color .3s;
+}
+
+nav a:hover { 
+  color: var(--primary); 
+  border-bottom: 2px solid var(--primary); 
+  padding-bottom: 4px;  
+}
+
+.user-section {
+  
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--primary);
+}
+
+.user-avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+
+
+.login-btn {
+  background-color: var(--primary);
+  color: var(--text-light);
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 50px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.login-btn:hover { 
+  background: var(--bg-dark);
+  border-style: solid;
+  border-width: 1px;
+  border-color: var(--primary);
+}
+
+.signup-btn {
+  background-color: var(--bg-dark);
+  color: var(--text-light);
+  border-style: solid;
+  border-width: 1px;
+  border-color: var(--primary);
+  padding: 0.6rem 1.2rem;
+  border-radius: 50px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.signup-btn:hover { background: var(--primary) }
+
+/* Hero */
+.hero {
+  background: var(--bg-dark);
+  color: white;
+  padding: 5rem 5% 8rem;
+}
+
+.hero-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  
+  align-items: center;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+  column-gap: 100px;
+}
+
+.hero-text .tagline {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  opacity: 0.9;
+}
+
+.hero-text h1 {
+  font-size: 3.2rem;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+}
+
+.hero-text h1 span { color: var(--primary); }
+
+.subtitle { font-size: 1.2rem; margin-bottom: 2rem; color: var(--text-light); opacity: 0.95; }
+
+.features-list {
+  margin: 2.5rem 0;
+  list-style: none;
+}
+
+.features-list li {
+  
+  font-size: 1.1rem;
+}
+
+.features-list i {
+  color: var(--primary);
+  margin-right: 0.8rem;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.btn {
+  padding: 0.9rem 2rem;
+  font-size: 1.1rem;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: bold;
+  border: none;
+  transition: all .3s;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: var(--bg-dark);
+  text-decoration: none;
+}
+
+.btn-primary:hover { 
+  background: #00b8a9; 
+  transform: translateY(-3px); 
+  text-decoration: none;
+}
+
+.btn-primary:visited {
+text-decoration: none;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: white;
+  border: 2px solid var(--primary);
+  text-decoration: none;
+}
+
+.btn-secondary:hover {
+  background: rgba(0,212,194,0.1);
+  transform: translateY(-3px); 
+  text-decoration: none;
+}
+
+.btn-secondary:visited {
+  text-decoration: none;
+}
+
+/* Hero Images */
+.hero-images {
+  position: relative;
+  height: 520px;
+ 
+  
+}
+
+.home-img-div {
+  display: inline;
+}
+.home-img {
+  width: 390px;
+  margin-top: 90px;
+}
+
+/* Features Section */
+.features-section {
+  padding: 6rem 5%;
+  text-align: center;
+  background: var(--bg-light);
+}
+
+.features-section h2 {
+  font-size: 2.8rem;
+  margin-bottom: 1rem;
+  color: var(--primary);
+}
+
+.features-section h2 span { color: var(--text-dark); }
+
+.features-section > p {
+  max-width: 800px;
+  margin: 0 auto 3rem;
+  font-size: 1.2rem;
+  color: var(--gray);
+}
+
+.avatars {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 4rem;
+}
+
+.avatars img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 4px solid white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-left: -15px; /* overlap avatars */
+  transition: transform 0.3s, box-shadow 0.3s; /* smooth hover effect */
+  cursor: pointer;
+}
+
+.avatars img:first-child {
+  margin-left: 0;
+}
+
+.avatars img:hover {
+  transform: translateY(-5px); 
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); 
+}
+
+
+.cards {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.card {
+  background: white;
+  padding: 2.5rem 2rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  transition: transform .3s;
+}
+
+.card:hover { transform: translateY(-10px); }
+
+.card.highlight {
+  background: var(--primary);
+  color: white;
+}
+
+.card-icon {
+  width: 80px;
+  height: 80px;
+  background: rgba(0,212,194,0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+}
+
+.highlight .card-icon {
+  background: rgba(255,255,255,0.25);
+}
+
+.card-icon i { font-size: 2rem; color: var(--primary); }
+
+.highlight .card-icon i { color: white; }
+
+.card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.card p {
+  color: var(--gray);
+  font-size: 1rem;
+}
+
+.highlight p { color: rgba(255,255,255,0.9); }
+
+
+.btn-primary, .btn-secondary{
+
+}

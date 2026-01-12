@@ -1,0 +1,30 @@
+<!-- includes/header-loggedin.html -->
+<header>
+  <div class="nav-container">
+    <div class="logo">
+      <img src="/images/icons/favicon.png" alt="Anchor Logo" class="logo-icon">
+      <span>Anchor</span>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="loan.html">Loan</a></li>
+        <li><a href="funding.html">Funding</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- LOGGED-IN USER SECTION -->
+    <div class="user-section logged-in">
+      <div class="user-profile">
+        <img src="https://randomuser.me/api/portraits/women/68.jpg" 
+             alt="User Avatar" 
+             id="userAvatar" 
+             class="user-avatar-img">
+        <span id="userName">User</span>
+      </div>
+      <button class="logout-btn" onclick="logout()">Log Out</button>
+    </div>
+  </div>
+</header>
