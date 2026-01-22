@@ -29,6 +29,42 @@ body.fade-in {
   opacity: 1;
 }
 
+/* Success Notification */
+.success-notification {
+  position: fixed;
+  top: 100px;
+  right: 20px;
+  background: linear-gradient(135deg, #00bfa5, #00e6cc);
+  color: white;
+  padding: 20px 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 191, 165, 0.4);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 16px;
+  font-weight: 500;
+  z-index: 10000;
+  animation: slideIn 0.4s ease-out;
+  max-width: 450px;
+}
+
+.success-notification i {
+  font-size: 24px;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(500px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
 /* Main Layout */
 main {
   padding: 40px 0;
@@ -140,7 +176,7 @@ main {
 
 /* Loans Container */
 .loans-container {
- 
+
   display: flex;
   flex-direction: column;
   gap: 30px;
@@ -193,13 +229,19 @@ main {
 }
 
 .label {
-  color: #00e6cc;     /* new color */
-  font-weight: 700;   /* bold */
-  font-size: 16px;    /* slightly bigger */
-  text-align: left;   /* left align */
+  color: #00e6cc;
+  /* new color */
+  font-weight: 700;
+  /* bold */
+  font-size: 16px;
+  /* slightly bigger */
+  text-align: left;
+  /* left align */
   display: inline-block;
-  width: auto;        /* remove fixed width */
-  margin-right: 10px; /* optional spacing before value */
+  width: auto;
+  /* remove fixed width */
+  margin-right: 10px;
+  /* optional spacing before value */
 }
 
 
@@ -255,15 +297,18 @@ main {
   .hero-text h1 {
     font-size: 32px;
   }
+
   .filter-btn {
     padding: 10px 20px;
     font-size: 14px;
   }
+
   .card-footer {
     flex-direction: column;
     align-items: flex-start;
     gap: 15px;
   }
+
   .actions {
     width: 100%;
     justify-content: space-between;

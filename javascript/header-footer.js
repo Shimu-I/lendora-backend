@@ -108,11 +108,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 // Logout function
+// Logout function
 function logout() {
-  localStorage.removeItem("isLoggedIn");
-  localStorage.removeItem("userName");
-  localStorage.removeItem("userAvatar");
-  location.reload();
+  window.location.href = 'logout.php';
 }
 
 

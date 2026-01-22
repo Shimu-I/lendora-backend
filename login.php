@@ -26,14 +26,20 @@ if (isset($_POST['login_btn'])) {
         // password_verify() checks the plain text password against the hash in DB
         if ($user && password_verify($password, $user['password_hash'])) {
 
+            // Block admin from logging in via normal login page
+            if ($user['role'] === 'admin') {
+                echo "<script>alert('Admins must use the admin login page'); window.location='admin-login.html';</script>";
+                exit();
+            }
+
             // --- SUCCESS: LOG IN ---
             $_SESSION['user_id'] = $user['user_id'];
             $_SESSION['role'] = $user['role'];
             $_SESSION['full_name'] = $user['full_name'];
 
-            // 5. Redirect based on Role (with LocalStorage update for frontend JS)
-            $redirect_url = ($user['role'] === 'admin') ? 'admin-dashboard.html' : 'index.html';
-            
+            // 5. Redirect to index page (admin blocked above)
+            $redirect_url = 'index.html';
+
             echo "<script>
                 localStorage.setItem('isLoggedIn', 'true');
                 localStorage.setItem('userName', '" . addslashes($user['full_name']) . "');
