@@ -9,17 +9,15 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="styles/index.css"> <!-- Your existing styles -->
+  <link rel="stylesheet" href="styles/index.css">
   <link rel="stylesheet" href="styles/auth.css">
-  <link rel="stylesheet" href="styles/header-footer.css"> <!-- Only login/signup styles -->
+  <link rel="stylesheet" href="styles/header-footer.css">
 </head>
 
 <body>
 
-  <!-- Header -->
   <div id="headerPlaceholder"></div>
 
-  <!-- Login Content -->
   <section class="auth-hero">
     <div class="auth-content">
       <div class="auth-text">
@@ -32,7 +30,11 @@
       <div class="auth-form-container">
         <div class="auth-form">
           <h2>Log In</h2>
-          <form id="loginForm">
+
+          <form action="login.php" method="POST">
+
+            <div id="php-error" style="color: red; margin-bottom: 10px;">
+            </div>
 
             <div class="input-group">
               <label for="email" class="sr-only">Email Address</label>
@@ -45,9 +47,7 @@
                 autocomplete="current-password">
             </div>
 
-            <div id="errorMessage" class="error-text" style="display:none; color: red; margin-bottom: 10px;"></div>
-
-            <button type="submit" class="btn-primary">Log In</button>
+            <button type="submit" name="login_btn" class="btn-primary">Log In</button>
           </form>
 
           <p class="forgot-pass"><a href="forgot-password.html">Forgot Password?</a></p>
@@ -58,8 +58,6 @@
   </section>
 
   <script src="javascript/header-footer.js"></script>
-  <script src="javascript/login.js"></script>
-
 </body>
 
 </html>
