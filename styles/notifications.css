@@ -97,7 +97,27 @@
   gap: 12px;
 }
 
+/* Remove avatar - no longer used */
+.notification-overlay .user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.notif-date {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 4px;
+}
+
+.notification-box.unread {
+  border-left: 4px solid #70C1BF;
+  background: #0F4C51;
+}
+
 .notification-overlay .avatar {
+  display: none;
+  /* Hide user photos */
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -163,16 +183,16 @@
     max-height: 90vh;
     padding: 30px 25px 20px 25px;
   }
-  
+
   .notification-overlay .title {
     font-size: 24px;
     margin-bottom: 24px;
   }
-  
+
   .notification-overlay .notification-box {
     width: 100%;
   }
-  
+
   .notification-overlay .message {
     width: auto;
     margin-left: 40px;
@@ -184,17 +204,17 @@
     width: 95%;
     padding: 25px 20px;
   }
-  
+
   .notification-overlay .title {
     font-size: 22px;
   }
-  
+
   .close-overlay {
     width: 30px;
     height: 30px;
     font-size: 18px;
   }
-  
+
   .notification-overlay .message {
     margin-left: 0;
     font-size: 13px;

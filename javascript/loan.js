@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
     loadLoans();
     setupFilters();
     setupSearch();
+    setupUserNameClick();
 });
 
 function showSuccessMessage(text) {
@@ -86,6 +87,20 @@ async function loadLoans(category = 'all', search = '') {
             data.loans.forEach(loan => {
                 container.innerHTML += createLoanCard(loan);
             });
+
+            // Scroll to specific loan if hash is present
+            if (window.location.hash) {
+                setTimeout(() => {
+                    const target = document.querySelector(window.location.hash);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        target.style.boxShadow = '0 0 20px rgba(112, 193, 191, 0.6)';
+                        setTimeout(() => {
+                            target.style.boxShadow = '';
+                        }, 2000);
+                    }
+                }, 300);
+            }
         } else {
             container.innerHTML = `
                 <div class="empty-state" style="padding: 60px; text-align: center;">
@@ -139,9 +154,9 @@ function createLoanCard(loan) {
     }
 
     return `
-        <article class="loan-card">
+        <article class="loan-card" id="loan-${loan.loan_id}">
             <div class="card-header">
-                <h3>User Name: ${loan.full_name || 'Anonymous'} ${ratingDisplay}</h3>
+                <h3>User Name: <span class="user-name" data-user-id="${loan.borrower_id}">${loan.full_name || 'Anonymous'}</span> ${ratingDisplay}</h3>
             </div>
 
             <div class="loan-info">
@@ -211,5 +226,154 @@ function setupSearch() {
                 loadLoans(currentCategory, currentSearch);
             }, 500); // Wait 500ms after user stops typing
         });
+    }
+}
+
+function setupUserNameClick() {
+    // Add event delegation for username clicks
+    const loansContainer = document.querySelector('.loans-container');
+    if (loansContainer) {
+        loansContainer.addEventListener('click', function (e) {
+            if (e.target.classList.contains('user-name')) {
+                const userId = e.target.getAttribute('data-user-id');
+                if (userId) {
+                    openUserProfileOverlay(userId);
+                }
+            }
+        });
+    }
+}
+
+async function openUserProfileOverlay(userId) {
+    try {
+        const response = await fetch(`api-get-public-profile.php?userId=${userId}`);
+        const data = await response.json();
+
+        if (!data.success) {
+            alert('Error loading profile: ' + data.error);
+            return;
+        }
+
+        displayUserProfileOverlay(data);
+    } catch (error) {
+        console.error('Error loading profile:', error);
+        alert('Failed to load profile. Please try again.');
+    }
+}
+
+function displayUserProfileOverlay(data) {
+    const user = data.user;
+    const stats = data.statistics;
+
+    // Format verification status
+    let verificationBadge = '';
+    if (user.verification_status === 'verified') {
+        verificationBadge = '<span style="color: #22c55e;">✓ Verified</span>';
+    } else if (user.verification_status === 'pending') {
+        verificationBadge = '<span style="color: #f5b800;">⏳ Pending</span>';
+    } else {
+        verificationBadge = '<span style="color: #ef4444;">✗ Not Verified</span>';
+    }
+
+    // Create overlay HTML
+    const overlayHTML = `
+        <div class="profile-overlay" id="profileOverlay">
+            <div class="profile-overlay-content">
+                <div class="profile-overlay-header">
+                    <h2>${user.full_name || 'User Profile'}</h2>
+                    <button class="profile-close-btn" onclick="closeUserProfileOverlay()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                
+                <div class="profile-overlay-body">
+                    <div class="profile-info-grid">
+                        <div class="profile-info-item">
+                            <span class="profile-label">Username:</span>
+                            <span class="profile-value">${user.username || 'N/A'}</span>
+                        </div>
+                        <div class="profile-info-item">
+                            <span class="profile-label">Student ID:</span>
+                            <span class="profile-value">${user.student_id || 'N/A'}</span>
+                        </div>
+                        <div class="profile-info-item">
+                            <span class="profile-label">University:</span>
+                            <span class="profile-value">${user.university || 'N/A'}</span>
+                        </div>
+                        <div class="profile-info-item">
+                            <span class="profile-label">Verification:</span>
+                            <span class="profile-value">${verificationBadge}</span>
+                        </div>
+                        <div class="profile-info-item">
+                            <span class="profile-label">Role:</span>
+                            <span class="profile-value">${user.role || 'N/A'}</span>
+                        </div>
+                        <div class="profile-info-item">
+                            <span class="profile-label">Rating:</span>
+                            <span class="profile-value">${user.avg_rating ? `${user.avg_rating}★ (${user.rating_count} ratings)` : 'No ratings yet'}</span>
+                        </div>
+                    </div>
+
+                    <div class="profile-stats-grid">
+                        <div class="profile-stat-box">
+                            <div class="stat-label">Total Funds Collected</div>
+                            <div class="stat-amount">৳${stats.total_funding_received.toLocaleString()}</div>
+                        </div>
+                        <div class="profile-stat-box">
+                            <div class="stat-label">Total Loans Collected</div>
+                            <div class="stat-amount">৳${stats.total_loans_received.toLocaleString()}</div>
+                        </div>
+                    </div>
+
+                    <div class="profile-section">
+                        <h3>Loan Requests</h3>
+                        <div class="stats-row">
+                            <span class="stat-item">Total: <strong>${stats.total_loans}</strong></span>
+                            <span class="stat-item stat-approved">Approved: <strong>${stats.approved_loans}</strong></span>
+                            <span class="stat-item stat-pending">Pending: <strong>${stats.pending_loans}</strong></span>
+                            <span class="stat-item stat-rejected">Rejected: <strong>${stats.rejected_loans}</strong></span>
+                        </div>
+                    </div>
+
+                    <div class="profile-section">
+                        <h3>Funding Posts</h3>
+                        <div class="stats-row">
+                            <span class="stat-item">Total: <strong>${stats.total_funding}</strong></span>
+                            <span class="stat-item stat-approved">Approved: <strong>${stats.approved_funding}</strong></span>
+                            <span class="stat-item stat-pending">Pending: <strong>${stats.pending_funding}</strong></span>
+                            <span class="stat-item stat-rejected">Rejected: <strong>${stats.rejected_funding}</strong></span>
+                        </div>
+                    </div>
+
+                    <div class="profile-section">
+                        <h3>Loan Offers Made (as Lender)</h3>
+                        <div class="stats-row">
+                            <span class="stat-item">Total: <strong>${stats.total_offers}</strong></span>
+                            <span class="stat-item stat-approved">Accepted: <strong>${stats.accepted_offers}</strong></span>
+                            <span class="stat-item stat-pending">Pending: <strong>${stats.pending_offers}</strong></span>
+                            <span class="stat-item stat-rejected">Rejected: <strong>${stats.rejected_offers}</strong></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+
+    // Add overlay to body
+    document.body.insertAdjacentHTML('beforeend', overlayHTML);
+
+    // Add click outside to close
+    const overlay = document.getElementById('profileOverlay');
+    overlay.addEventListener('click', function (e) {
+        if (e.target === overlay) {
+            closeUserProfileOverlay();
+        }
+    });
+}
+
+function closeUserProfileOverlay() {
+    const overlay = document.getElementById('profileOverlay');
+    if (overlay) {
+        overlay.remove();
     }
 }

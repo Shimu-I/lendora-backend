@@ -32,17 +32,28 @@
 
     <div class="profile-header">
       <div class="profile-info-section">
-        <img src="images/user-avatar.jpg" alt="User Avatar" class="profile-avatar">
-
         <div class="profile-details">
-          <h2 class="user-name">User Name: Elli-user</h2>
-          <p class="user-id">User ID: 85998765</p>
-          <p class="user-email">Email: user@gmail.com</p>
-          <p class="user-rating">Your rating: 4.5 form 40 reviews</p>
+          <h2 class="user-name" id="userName">Loading your profile...</h2>
+          <p class="user-info" id="userId"><strong>User ID:</strong> <span class="skeleton">Loading...</span></p>
+          <p class="user-info" id="userEmail"><strong>Email:</strong> <span class="skeleton">Loading...</span></p>
+          <p class="user-info" id="userUsername"><strong>Username:</strong> <span class="skeleton">Loading...</span></p>
+          <p class="user-info" id="userStudentId"><strong>Student ID:</strong> <span class="skeleton">Loading...</span>
+          </p>
+          <p class="user-info" id="userUniversity"><strong>University:</strong> <span class="skeleton">Loading...</span>
+          </p>
+          <p class="user-info" id="userStatus"><strong>Verification:</strong> <span class="skeleton">Loading...</span>
+          </p>
+          <p class="user-info" id="userRole"><strong>Role:</strong> <span class="skeleton">Loading...</span></p>
+          <p class="user-rating" id="userRating"><strong>Your Rating:</strong> <span class="skeleton">Loading...</span>
+          </p>
 
           <div class="profile-buttons">
-            <button class="btn-edit">Edit</button>
+            <button class="btn-edit">Edit Profile</button>
             <button class="btn-notifications">Notifications</button>
+            <button class="btn-verify" id="btnVerify" title="Upload university ID card for identification">
+              <i class="fas fa-check-circle"></i> Verify
+            </button>
+            <input type="file" id="verificationUpload" accept="image/*" style="display: none;">
           </div>
         </div>
       </div>
@@ -50,169 +61,66 @@
       <div class="profile-stats">
         <div class="stat-box">
           <h3>Total Funds Collected</h3>
-          <div class="stat-value">৳10,000</div>
+          <div class="stat-value" id="totalFundsCollected">৳0</div>
         </div>
         <div class="stat-box">
           <h3>Total Loans Collected</h3>
-          <div class="stat-value">৳3,000</div>
+          <div class="stat-value" id="totalLoansCollected">৳0</div>
         </div>
       </div>
     </div>
 
     <!-- Loan Request Section -->
     <div class="section-container">
-      <h2 class="section-title">Loan Request (5)</h2>
-
-      <div class="cards-grid">
-        <!-- Loan Request Card 1 -->
-        <div class="card">
-          <div class="card-row">
-            <span class="card-label">Category</span>
-            <span class="badge badge-hospital">Hospital</span>
-          </div>
-          <div class="card-row">
-            <span class="card-label">Amount needed:</span>
-            <span class="card-value">5000 taka</span>
-          </div>
-
-          <div class="card-row">
-            <span class="card-label">Date:</span>
-            <span class="card-value">12 nov, 2025</span>
-          </div>
-          <div class="card-row">
-            <span class="card-label">Status</span>
-            <span class="badge badge-progress">In progress</span>
-          </div>
-          <button class="btn-view-details">View Details</button>
-        </div>
-
-        <!-- Loan Request Card 2 -->
-        <div class="card">
-          <div class="card-row">
-            <span class="card-label">Category</span>
-            <span class="badge badge-collage">Collage</span>
-          </div>
-          <div class="card-row">
-            <span class="card-label">Amount needed:</span>
-            <span class="card-value">5000 taka</span>
-          </div>
-
-          <div class="card-row">
-            <span class="card-label">Date:</span>
-            <span class="card-value">12 nov, 2025</span>
-          </div>
-          <div class="card-row">
-            <span class="card-label">Status</span>
-            <span class="badge badge-approved">Approved</span>
-          </div>
-          <div class="card-row">
-            <span class="card-label">Offers received</span>
-            <a href="offer-received.html" class="btn-view-small">View Offers</a>
-
-          </div>
-          <button class="btn-view-details">View Details</button>
-        </div>
-
-        <!-- Loan Request Card 3 -->
-        <div class="card">
-          <div class="card-row">
-            <span class="card-label">Category</span>
-            <span class="badge badge-collage">Collage</span>
-          </div>
-          <div class="card-row">
-            <span class="card-label">Amount needed:</span>
-            <span class="card-value">5000 taka</span>
-          </div>
-
-          <div class="card-row">
-            <span class="card-label">Date:</span>
-            <span class="card-value">12 nov, 2025</span>
-          </div>
-          <div class="card-row">
-            <span class="card-label">Status</span>
-            <span class="badge badge-approved">Approved</span>
-          </div>
-          <div class="card-row">
-            <span class="card-label">Offers received</span>
-            <a href="offer-received.html" class="btn-view-small">View Offers</a>
-          </div>
-          <button class="btn-view-details">View Details</button>
-        </div>
+      <h2 class="section-title">Loan Requests (<span id="loanCount">0</span>)</h2>
+      <div class="cards-grid" id="loansContainer">
+        <p style="text-align: center; padding: 40px;">Loading...</p>
       </div>
     </div>
 
     <!-- Funding Post Section -->
     <div class="section-container">
-      <h2 class="section-title">Funding Post (4)</h2>
-
-      <div class="cards-grid">
-        <!-- Funding Post Card 1 -->
-        <div class="card">
-          <div class="card-row">
-            <span class="card-label">Category</span>
-            <span class="badge badge-flood">Flood Relief</span>
-          </div>
-          <div class="card-row">
-            <span class="card-label">Amount needed:</span>
-            <span class="card-value">12500 taka</span>
-          </div>
-
-          <div class="card-row">
-            <span class="card-label">Date:</span>
-            <span class="card-value">12 Feb, 2025</span>
-          </div>
-          <div class="card-row">
-            <span class="card-label">Status</span>
-            <span class="badge badge-progress">In progress</span>
-          </div>
-
-          <a href="funding-view.html" id="btn-view-fund" class="btn-view-details">View Details</a>
-        </div>
-
-        <!-- Funding Post Card 2 -->
-        <div class="card">
-          <div class="card-row">
-            <span class="card-label">Category</span>
-            <span class="badge badge-flood">Flood Relief</span>
-          </div>
-          <div class="card-row">
-            <span class="card-label">Amount needed:</span>
-            <span class="card-value">12500 taka</span>
-          </div>
-
-          <div class="card-row">
-            <span class="card-label">Date:</span>
-            <span class="card-value">12 Feb, 2025</span>
-          </div>
-          <div class="card-row">
-            <span class="card-label">Status</span>
-            <span class="badge badge-approved">Approved</span>
-          </div>
-          <button class="btn-view-details">View Details</button>
-        </div>
-
-        <!-- Funding Post Card 3 -->
-        <div class="card">
-          <div class="card-row">
-            <span class="card-label">Category</span>
-            <span class="badge badge-flood">Flood Relief</span>
-          </div>
-          <div class="card-row">
-            <span class="card-label">Amount needed:</span>
-            <span class="card-value">12500 taka</span>
-          </div>
-
-          <div class="card-row">
-            <span class="card-label">Date:</span>
-            <span class="card-value">12 Feb, 2025</span>
-          </div>
-          <div class="card-row">
-            <span class="card-label">Status</span>
-            <span class="badge badge-approved">Approved</span>
-          </div>
-          <button class="btn-view-details">View Details</button>
-        </div>
+      <h2 class="section-title">Funding Posts (<span id="fundingCount">0</span>)</h2>
+      <div class="cards-grid" id="fundingContainer">
+        <p style="text-align: center; padding: 40px;">Loading...</p>
       </div>
+    </div>
+
+    <!-- My Offers Section (NEW) -->
+    <div class="section-container">
+      <h2 class="section-title">My Loan Offers (<span id="offersCount">0</span>)</h2>
+      <div class="cards-grid" id="offersContainer">
+        <p style="text-align: center; padding: 40px;">Loading...</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Profile Modal -->
+  <div id="editModal" class="modal">
+    <div class="modal-content">
+      <h2>Edit Profile</h2>
+      <form id="editProfileForm">
+        <div class="form-group">
+          <label for="editFullName">Full Name</label>
+          <input type="text" id="editFullName" name="full_name" required>
+        </div>
+        <div class="form-group">
+          <label for="editEmail">Email</label>
+          <input type="email" id="editEmail" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="editStudentId">Student ID</label>
+          <input type="text" id="editStudentId" name="student_id">
+        </div>
+        <div class="form-group">
+          <label for="editUniversity">University</label>
+          <input type="text" id="editUniversity" name="university">
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn-save">Save Changes</button>
+          <button type="button" class="btn-cancel">Cancel</button>
+        </div>
+      </form>
     </div>
   </div>
 
@@ -221,6 +129,7 @@
 
   <script src="javascript/header-footer.js"></script>
   <script src="javascript/notifications.js"></script>
+  <script src="javascript/user-profile.js"></script>
 </body>
 
 </html>
