@@ -9,9 +9,13 @@ try {
     $category = $_GET['category'] ?? 'all';
     $search = $_GET['search'] ?? '';
 
+    // Get current user ID if logged in
+    $current_user_id = $_SESSION['user_id'] ?? null;
+
     // Build the SQL query
     $sql = "SELECT 
                 lr.loan_id,
+                lr.borrower_id,
                 lr.category,
                 lr.custom_category,
                 lr.amount,
@@ -25,11 +29,16 @@ try {
                 u.email,
                 COUNT(DISTINCT lo.offer_id) as response_count,
                 COUNT(DISTINCT CASE WHEN lo.status = 'accepted' THEN lo.offer_id END) as accepted_count,
-                GROUP_CONCAT(DISTINCT ld.doc_type SEPARATOR ', ') as documents
+                GROUP_CONCAT(DISTINCT ld.doc_type SEPARATOR ', ') as documents,
+                MAX(CASE WHEN lo.lender_id = :current_user_id THEN 1 ELSE 0 END) as user_has_offered,
+                MAX(CASE WHEN lo.lender_id = :current_user_id AND lo.status = 'accepted' THEN 1 ELSE 0 END) as user_is_lender,
+                AVG(lrt.score) as avg_rating,
+                COUNT(DISTINCT lrt.rating_id) as rating_count
             FROM loan_requests lr
             INNER JOIN users u ON lr.borrower_id = u.user_id
             LEFT JOIN loan_offers lo ON lr.loan_id = lo.loan_id
             LEFT JOIN loan_documents ld ON lr.loan_id = ld.loan_id
+            LEFT JOIN loan_ratings lrt ON lrt.ratee_id = lr.borrower_id
             WHERE lr.status = 'approved'";
 
     $params = [];
@@ -48,6 +57,9 @@ try {
 
     $sql .= " GROUP BY lr.loan_id
               ORDER BY lr.created_at DESC";
+
+    // Add current_user_id to params
+    $params[':current_user_id'] = $current_user_id;
 
     $stmt = $conn->prepare($sql);
     $stmt->execute($params);

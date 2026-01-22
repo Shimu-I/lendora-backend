@@ -11,6 +11,12 @@ document.addEventListener('DOMContentLoaded', function () {
         localStorage.removeItem('offerSuccess');
     }
 
+    // Check for success message from rating submission
+    if (localStorage.getItem('ratingSuccess') === 'true') {
+        showSuccessMessage('Your rating has been submitted successfully!');
+        localStorage.removeItem('ratingSuccess');
+    }
+
     loadLoans();
     setupFilters();
     setupSearch();
@@ -114,19 +120,28 @@ function createLoanCard(loan) {
     const currentUserId = localStorage.getItem('userId');
     const isOwnLoan = currentUserId && (parseInt(loan.borrower_id) === parseInt(currentUserId));
     const hasOffered = loan.user_has_offered == 1;
+    const isLender = loan.user_is_lender == 1; // Has accepted offer (gave money)
 
     console.log('Checking loan ownership:', {
         loanId: loan.loan_id,
         borrowerId: loan.borrower_id,
         currentUserId: currentUserId,
         isOwnLoan: isOwnLoan,
-        hasOffered: hasOffered
+        hasOffered: hasOffered,
+        isLender: isLender
     });
+
+    // Format rating display
+    let ratingDisplay = '';
+    if (loan.avg_rating && parseFloat(loan.avg_rating) > 0) {
+        const avgRating = parseFloat(loan.avg_rating).toFixed(1);
+        ratingDisplay = `<span class="user-rating">(${avgRating}★)</span>`;
+    }
 
     return `
         <article class="loan-card">
             <div class="card-header">
-                <h3>User Name: ${loan.full_name || 'Anonymous'}</h3>
+                <h3>User Name: ${loan.full_name || 'Anonymous'} ${ratingDisplay}</h3>
             </div>
 
             <div class="loan-info">
@@ -140,7 +155,12 @@ function createLoanCard(loan) {
 
             <div class="card-footer">
                 <div class="actions">
-                    <a href="rate-borrower.html?loan_id=${loan.loan_id}" class="btn-rating">Submit Rating</a>
+                    ${isOwnLoan
+            ? `<button class="btn-rating btn-disabled" onclick="event.preventDefault(); alert('You cannot rate your own loan request.'); return false;">Submit Rating</button>`
+            : !isLender
+                ? `<button class="btn-rating btn-disabled" onclick="event.preventDefault(); alert('Only lenders who provided money can submit a rating.'); return false;">Submit Rating</button>`
+                : `<a href="rate-borrower.html?loan_id=${loan.loan_id}" class="btn-rating">Submit Rating</a>`
+        }
                     ${isOwnLoan
             ? `<button class="btn-offer btn-disabled" onclick="event.preventDefault(); alert('You cannot make an offer on your own loan request.'); return false;">Make Offer</button>`
             : hasOffered

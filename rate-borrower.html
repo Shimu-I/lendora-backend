@@ -31,23 +31,18 @@
       <!-- Title -->
       <h1 class="title">Rate The Borrower</h1>
 
-      <!-- User Profile Section -->
-      <div class="user-profile">
-        <img src="images/user-avatar.jpg" alt="User Avatar" class="user-avatar">
-        <div class="user-info">
-          <h2 class="user-name">User Name: Elli_user</h2>
-          <p class="user-rating">4.5 (120 reviews)</p>
-        </div>
+      <!-- Borrower Info (Loaded via JS) -->
+      <div class="borrower-info" id="borrowerInfo"
+        style="margin-bottom: 30px; padding: 20px; background: rgba(255,255,255,0.1); border-radius: 12px;">
+        <h3 style="color: #70C1BF; margin-bottom: 10px;">Borrower: <span id="borrowerName">Loading...</span></h3>
+        <p style="color: #d0ece7; margin: 5px 0;">Loan Amount: <span id="loanAmount">-</span></p>
+        <p style="color: #d0ece7; margin: 5px 0;">Category: <span id="loanCategory">-</span></p>
       </div>
 
-      <form id="ratingForm">
+      <form id="ratingForm" action="rate-borrower.php" method="POST">
 
-        <!-- Borrower History -->
-        <div class="section history-section">
-          <h3 class="section-title">Borrower History</h3>
-          <p class="history-item">3 loans repaid on time</p>
-          <p class="history-item">Borrowed 5 times</p>
-        </div>
+        <input type="hidden" name="loan_id" id="hiddenLoanId">
+        <input type="hidden" name="score" id="hiddenScore" value="0">
 
         <!-- Category Ratings -->
         <div class="section ratings-section">
@@ -116,7 +111,7 @@
 
               <!-- Total Rating -->
               <div class="total-rating">
-                <span class="total-text" id="totalRating">Total Rating: 0/20</span>
+                <span class="total-text" id="totalRating">Avg Rating: 0/5</span>
               </div>
             </div>
           </div>
@@ -125,7 +120,8 @@
         <!-- Your Experience -->
         <div class="section experience-section">
           <label class="section-title">Your Experience</label>
-          <textarea class="textarea-experience" placeholder="write your experience in here"></textarea>
+          <textarea name="review" class="textarea-experience" placeholder="write your experience in here"
+            required></textarea>
         </div>
 
         <!-- Recommendation -->
@@ -141,7 +137,7 @@
             </label>
             <label class="radio-option">
               <span class="radio-label">No</span>
-              <input type="radio" name="recommend" value="no" checked>
+              <input type="radio" name="recommend" value="no">
               <span class="radio-box"></span>
             </label>
           </div>
@@ -150,7 +146,7 @@
         <!-- Confirmation -->
         <div class="confirmation">
           <label class="checkbox-wrapper">
-            <input type="checkbox" checked required>
+            <input type="checkbox" required>
             <span class="checkbox-box"></span>
           </label>
           <p class="confirmation-text">
@@ -158,9 +154,8 @@
           </p>
         </div>
 
-        <button type="submit" class="btn-submit">Submit</button>
+        <button type="submit" name="submit_rating" class="btn-submit">Submit Rating</button>
       </form>
-
     </div>
   </div>
 
@@ -169,6 +164,37 @@
 
   <script src="javascript/header-footer.js"></script>
   <script>
+    // URL Params
+    const urlParams = new URLSearchParams(window.location.search);
+    const loanId = urlParams.get('loan_id');
+
+    if (!loanId) {
+      alert('No loan specified.');
+      window.location = 'loan.html';
+    } else {
+      document.getElementById('hiddenLoanId').value = loanId;
+      loadLoanInfo(loanId);
+    }
+
+    // Fetch loan and borrower info
+    async function loadLoanInfo(loanId) {
+      try {
+        const response = await fetch(`api-get-loan-info.php?loan_id=${loanId}`);
+        const data = await response.json();
+
+        if (data.success) {
+          document.getElementById('borrowerName').textContent = data.borrower_name;
+          document.getElementById('loanAmount').textContent = parseFloat(data.amount).toLocaleString() + ' taka';
+          document.getElementById('loanCategory').textContent = data.category;
+        } else {
+          alert('Error loading loan info: ' + data.error);
+          window.location = 'loan.html';
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }
+
     // Star Rating System
     const ratings = {
       timely: 0,
@@ -228,8 +254,14 @@
     });
 
     function updateTotalRating() {
-      const total = ratings.timely + ratings.communication + ratings.trustworthy + ratings.agreement;
-      document.getElementById('totalRating').textContent = `Total Rating: ${total}/20`;
+      // Calculate Average (1-5)
+      const sum = ratings.timely + ratings.communication + ratings.trustworthy + ratings.agreement;
+      // If any is 0, should we allow? Let's assume yes, but maybe count only non-zero?
+      // For simplicity, just divide by 4.
+      const avg = Math.round(sum / 4);
+
+      document.getElementById('totalRating').textContent = `Avg Rating: ${avg}/5`;
+      document.getElementById('hiddenScore').value = avg;
     }
   </script>
 </body>

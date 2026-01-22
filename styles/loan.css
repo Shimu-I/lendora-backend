@@ -216,6 +216,13 @@ main {
   margin: 0;
 }
 
+.user-rating {
+  font-size: 14px;
+  color: #b0b0b0;
+  font-weight: 400;
+  margin-left: 8px;
+}
+
 /* Loan Info */
 .loan-info {
   font-size: 15px;
@@ -365,6 +372,12 @@ main {
   cursor: not-allowed !important;
   opacity: 0.5;
   pointer-events: auto;
+}
+
+.btn-rating.btn-disabled {
+  background: rgba(220, 70, 80, 0.2) !important;
+  color: rgba(255, 255, 255, 0.4) !important;
+}
 }
 
 .btn-rating:visited {
