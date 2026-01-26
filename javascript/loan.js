@@ -232,13 +232,13 @@ function setupSearch() {
 
 function setupSort() {
     const sortSelect = document.getElementById('sortSelect');
-    
+
     if (sortSelect) {
-        sortSelect.addEventListener('change', function() {
+        sortSelect.addEventListener('change', function () {
             const sortValue = this.value;
             const container = document.querySelector('.loans-container');
             const cards = Array.from(container.querySelectorAll('.loan-card'));
-            
+
             if (sortValue === 'recent') {
                 // Sort by date (most recent first)
                 cards.sort((a, b) => {
@@ -264,7 +264,7 @@ function setupSort() {
                     return parseFloat(a.dataset.amount) - parseFloat(b.dataset.amount);
                 });
             }
-            
+
             // Clear and re-append sorted cards
             container.innerHTML = '';
             cards.forEach(card => container.appendChild(card));
