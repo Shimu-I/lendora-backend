@@ -115,11 +115,25 @@ function createLoanCard(loan) {
                     <button class="btn btn-decline" data-id="${loan.loan_id}" data-action="reject">
                         Decline
                     </button>
+                ` : loan.status === 'approved' ? `
+                    <button class="btn btn-decline" data-id="${loan.loan_id}" data-action="reject" title="Decline this approved loan">
+                        Decline
+                    </button>
+                    <span class="status-badge status-${loan.status}">
+                        ${loan.status.toUpperCase()}
+                    </span>
                 ` : `
+                    <button class="btn btn-approve" data-id="${loan.loan_id}" data-action="approve" title="Approve this rejected loan">
+                        Approve
+                    </button>
                     <span class="status-badge status-${loan.status}">
                         ${loan.status.toUpperCase()}
                     </span>
                 `}
+                
+                <button class="btn btn-delete" data-id="${loan.loan_id}" title="Delete this loan request">
+                    Delete
+                </button>
             </div>
         </div>
     `;
@@ -138,9 +152,15 @@ function attachEventListeners() {
     document.querySelectorAll('.btn-decline').forEach(btn => {
         btn.addEventListener('click', function () {
             const loanId = this.getAttribute('data-id');
-            if (confirm('Are you sure you want to decline this loan request?')) {
-                handleApproval(loanId, 'reject');
-            }
+            handleApproval(loanId, 'reject');
+        });
+    });
+
+    // Delete buttons
+    document.querySelectorAll('.btn-delete').forEach(btn => {
+        btn.addEventListener('click', function () {
+            const loanId = this.getAttribute('data-id');
+            handleDelete(loanId);
         });
     });
 }
@@ -171,17 +191,63 @@ async function handleApproval(loanId, action) {
         console.log('Approval response:', data);
 
         if (data.success) {
-            alert(`Loan request ${action === 'approve' ? 'approved' : 'declined'} successfully!`);
+            showNotification(
+                `Loan request ${action === 'approve' ? 'approved' : 'declined'} successfully!`,
+                'success'
+            );
             loadLoanRequests(); // Reload the list
         } else {
-            alert('Error: ' + (data.error || 'Unknown error occurred'));
+            showNotification('Error: ' + (data.error || 'Unknown error occurred'), 'error');
             buttons.forEach(btn => btn.disabled = false);
         }
     } catch (error) {
         console.error('Error during approval:', error);
-        alert('An error occurred: ' + error.message);
+        showNotification('An error occurred: ' + error.message, 'error');
         buttons.forEach(btn => btn.disabled = false);
     }
+}
+
+async function handleDelete(loanId) {
+    if (!confirm('Are you sure you want to delete this loan request? This action cannot be undone.')) {
+        return;
+    }
+
+    try {
+        const response = await fetch('api/api-admin-loans.php', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: `loan_id=${loanId}`
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            showNotification('Loan request deleted successfully!', 'success');
+            loadLoanRequests(); // Reload the list
+        } else {
+            showNotification('Error: ' + (data.error || 'Unknown error occurred'), 'error');
+        }
+    } catch (error) {
+        console.error('Error during deletion:', error);
+        showNotification('An error occurred: ' + error.message, 'error');
+    }
+}
+
+function showNotification(message, type = 'success') {
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    notification.innerHTML = `
+        <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+        <span>${message}</span>
+    `;
+    document.body.appendChild(notification);
+
+    setTimeout(() => {
+        notification.style.animation = 'slideOut 0.3s ease-out';
+        setTimeout(() => notification.remove(), 300);
+    }, 3000);
 }
 
 function viewDocuments(loanId) {

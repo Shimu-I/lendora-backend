@@ -27,6 +27,7 @@ try {
                 lr.created_at,
                 u.full_name,
                 u.email,
+                u.verification_status,
                 COUNT(DISTINCT lo.offer_id) as response_count,
                 COUNT(DISTINCT CASE WHEN lo.status = 'accepted' THEN lo.offer_id END) as accepted_count,
                 GROUP_CONCAT(DISTINCT ld.doc_type SEPARATOR ', ') as documents,

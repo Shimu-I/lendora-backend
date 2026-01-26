@@ -34,7 +34,9 @@ async function loadLoanDocuments() {
     `;
 
     try {
-        const response = await fetch(`api/api-get-loan-documents.php?loan_id=${loanId}`);
+        const response = await fetch(`api/api-get-loan-documents.php?loan_id=${loanId}`, {
+            credentials: 'include'
+        });
 
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);

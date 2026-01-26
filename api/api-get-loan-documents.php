@@ -24,12 +24,10 @@ try {
                 ld.file_path,
                 ld.file_name,
                 ld.file_size,
-                ld.mime_type,
-                ld.verified,
-                ld.uploaded_at
+                ld.mime_type
             FROM loan_documents ld
             WHERE ld.loan_id = :loan_id
-            ORDER BY ld.uploaded_at DESC";
+            ORDER BY ld.doc_id DESC";
 
     $stmt = $conn->prepare($sql);
     $stmt->execute([':loan_id' => $loan_id]);

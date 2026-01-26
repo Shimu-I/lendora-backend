@@ -91,8 +91,9 @@
 
             <!-- 5. Proof Documents -->
             <div class="form-group proof-section">
-                <label class="section-label">5. Proof Documents</label>
-                <p class="helper-text">Upload Supporting Document (Photo/PDF allowed)</p>
+                <label class="section-label">5. Proof Documents <span style="color: #ff6b6b;">*</span></label>
+                <p class="helper-text">Upload Supporting Document (Photo/PDF allowed) - At least one document is
+                    required</p>
 
                 <div class="examples-box">
                     <p class="examples-title">Examples:</p>
@@ -118,7 +119,9 @@
 
                 <button type="button" class="upload-btn">Choose File 📤</button>
                 <span id="fileNameDisplay" style="margin-left: 10px; color: #27ae60; font-size: 0.9em;"></span>
-                <input type="file" name="loan_documents[]" id="proofUpload" multiple hidden accept="image/*,.pdf">
+                <input type="file" name="loan_documents[]" id="proofUpload" multiple required hidden
+                    accept="image/*,.pdf">
+                <p style="color: #ff6b6b; font-size: 12px; margin-top: 5px;">* At least one document is required</p>
             </div>
 
             <!-- Confirmation -->

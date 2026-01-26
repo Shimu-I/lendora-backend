@@ -78,21 +78,22 @@ if (isset($_POST['submit_loan_request'])) {
 
                     if (in_array($ext, $allowed)) {
                         $new_filename = uniqid() . "_" . $filename;
-                        $path = "images/uploads/loans/" . $new_filename;
+                        $path = "../images/uploads/loans/" . $new_filename;
 
-                        if (!file_exists("images/uploads/loans/")) {
-                            mkdir("images/uploads/loans/", 0777, true);
+                        if (!file_exists("../images/uploads/loans/")) {
+                            mkdir("../images/uploads/loans/", 0777, true);
                         }
 
                         if (move_uploaded_file($filetmp, $path)) {
-                            // Insert document record
+                            // Insert document record - store path without ../ for database
+                            $db_path = "images/uploads/loans/" . $new_filename;
                             $doc_sql = "INSERT INTO loan_documents (loan_id, doc_type, file_path, file_name, file_size, mime_type) 
                                         VALUES (:loan_id, :doc_type, :file_path, :file_name, :file_size, :mime_type)";
                             $doc_stmt = $conn->prepare($doc_sql);
                             $doc_stmt->execute([
                                 ':loan_id' => $loan_id,
-                                ':doc_type' => $doc_type, // Ideally should allow per-file type selection, but broadly applies here
-                                ':file_path' => $path,
+                                ':doc_type' => $doc_type,
+                                ':file_path' => $db_path,
                                 ':file_name' => $filename,
                                 ':file_size' => $filesize,
                                 ':mime_type' => $filetype

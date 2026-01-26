@@ -9,6 +9,84 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
     exit();
 }
 
+// Handle DELETE request
+if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
+    parse_str(file_get_contents("php://input"), $_DELETE);
+    $loan_id = $_DELETE['loan_id'] ?? 0;
+
+    if (empty($loan_id)) {
+        http_response_code(400);
+        echo json_encode(['success' => false, 'error' => 'Missing loan ID']);
+        exit();
+    }
+
+    try {
+        $conn->beginTransaction();
+
+        // Delete loan request (CASCADE will handle documents and offers)
+        $sql = "DELETE FROM loan_requests WHERE loan_id = :loan_id";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([':loan_id' => $loan_id]);
+
+        $conn->commit();
+
+        header('Content-Type: application/json');
+        echo json_encode([
+            'success' => true,
+            'message' => 'Loan request deleted successfully'
+        ]);
+    } catch (PDOException $e) {
+        $conn->rollBack();
+        http_response_code(500);
+        echo json_encode([
+            'success' => false,
+            'error' => $e->getMessage()
+        ]);
+    }
+    exit();
+}
+
+// Handle PUT request for status toggle
+if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
+    parse_str(file_get_contents("php://input"), $_PUT);
+    $loan_id = $_PUT['loan_id'] ?? 0;
+    $new_status = $_PUT['status'] ?? '';
+
+    if (empty($loan_id) || empty($new_status)) {
+        http_response_code(400);
+        echo json_encode(['success' => false, 'error' => 'Missing parameters']);
+        exit();
+    }
+
+    try {
+        $sql = "UPDATE loan_requests 
+                SET status = :status, 
+                    approved_by = :admin_id, 
+                    approval_date = NOW() 
+                WHERE loan_id = :loan_id";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([
+            ':status' => $new_status,
+            ':admin_id' => $_SESSION['user_id'],
+            ':loan_id' => $loan_id
+        ]);
+
+        header('Content-Type: application/json');
+        echo json_encode([
+            'success' => true,
+            'message' => 'Status updated successfully'
+        ]);
+    } catch (PDOException $e) {
+        http_response_code(500);
+        echo json_encode([
+            'success' => false,
+            'error' => $e->getMessage()
+        ]);
+    }
+    exit();
+}
+
 try {
     // Fetch all loan requests with borrower information
     $sql = "SELECT 
