@@ -39,7 +39,7 @@ try {
             LEFT JOIN loan_offers lo ON lr.loan_id = lo.loan_id
             LEFT JOIN loan_documents ld ON lr.loan_id = ld.loan_id
             LEFT JOIN loan_ratings lrt ON lrt.ratee_id = lr.borrower_id
-            WHERE lr.status = 'approved'";
+            WHERE lr.status IN ('approved', 'funded', 'active')";
 
     $params = [];
 

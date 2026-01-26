@@ -1,12 +1,6 @@
-/* Page fade animation */
+/* Optimized for fast loading */
 body {
-  opacity: 0;
-  transition: opacity 0.4s ease;
   background-color: #0c1b23;
-}
-
-body.fade-in {
-  opacity: 1;
 }
 
 /* Profile Container */
@@ -373,7 +367,7 @@ body.fade-in {
   cursor: pointer;
   font-weight: bold;
   width: 100px;
-  
+
 
   text-decoration: none;
   display: inline-block;
@@ -382,16 +376,16 @@ body.fade-in {
 
 
 .btn-send-money:visited {
-    color: white;
+  color: white;
 }
 
-.btn-send-money:hover{
-    text-decoration: none;
-    color: white;
-    opacity: 0.9; 
+.btn-send-money:hover {
+  text-decoration: none;
+  color: white;
+  opacity: 0.9;
 }
 
-.btn-send-money:active{
-    color: white;
-    transform: translateY(1px);
+.btn-send-money:active {
+  color: white;
+  transform: translateY(1px);
 }

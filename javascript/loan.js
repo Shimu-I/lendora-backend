@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
     loadLoans();
     setupFilters();
     setupSearch();
+    setupSort();
     setupUserNameClick();
 });
 
@@ -154,7 +155,7 @@ function createLoanCard(loan) {
     }
 
     return `
-        <article class="loan-card" id="loan-${loan.loan_id}">
+        <article class="loan-card" id="loan-${loan.loan_id}" data-date="${loan.created_at}" data-amount="${loan.amount}">
             <div class="card-header">
                 <h3>User Name: <span class="user-name" data-user-id="${loan.borrower_id}">${loan.full_name || 'Anonymous'}</span> ${ratingDisplay}</h3>
             </div>
@@ -225,6 +226,48 @@ function setupSearch() {
                 currentSearch = this.value.trim();
                 loadLoans(currentCategory, currentSearch);
             }, 500); // Wait 500ms after user stops typing
+        });
+    }
+}
+
+function setupSort() {
+    const sortSelect = document.getElementById('sortSelect');
+    
+    if (sortSelect) {
+        sortSelect.addEventListener('change', function() {
+            const sortValue = this.value;
+            const container = document.querySelector('.loans-container');
+            const cards = Array.from(container.querySelectorAll('.loan-card'));
+            
+            if (sortValue === 'recent') {
+                // Sort by date (most recent first)
+                cards.sort((a, b) => {
+                    const dateA = new Date(a.dataset.date);
+                    const dateB = new Date(b.dataset.date);
+                    return dateB - dateA;
+                });
+            } else if (sortValue === 'oldest') {
+                // Sort by date (oldest first)
+                cards.sort((a, b) => {
+                    const dateA = new Date(a.dataset.date);
+                    const dateB = new Date(b.dataset.date);
+                    return dateA - dateB;
+                });
+            } else if (sortValue === 'amount-high') {
+                // Sort by amount (highest first)
+                cards.sort((a, b) => {
+                    return parseFloat(b.dataset.amount) - parseFloat(a.dataset.amount);
+                });
+            } else if (sortValue === 'amount-low') {
+                // Sort by amount (lowest first)
+                cards.sort((a, b) => {
+                    return parseFloat(a.dataset.amount) - parseFloat(b.dataset.amount);
+                });
+            }
+            
+            // Clear and re-append sorted cards
+            container.innerHTML = '';
+            cards.forEach(card => container.appendChild(card));
         });
     }
 }
