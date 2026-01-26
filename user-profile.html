@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="styles/header-footer.css">
   <link rel="stylesheet" href="styles/user-profile.css">
   <link rel="stylesheet" href="styles/notifications.css">
+  <link rel="stylesheet" href="styles/verified-badge.css">
 </head>
 
 <body>
@@ -28,45 +29,74 @@
 
   <!-- User Profile Section -->
   <div class="profile-container">
-    <h1 class="profile-title">User Profile</h1>
+    <h1 class="profile-title">
+      <i class="fas fa-user-circle" style="margin-right: 10px; font-size: 1.4rem;"></i>
+      User Profile
+    </h1>
 
-    <div class="profile-header">
-      <div class="profile-info-section">
-        <div class="profile-details">
-          <h2 class="user-name" id="userName">Loading your profile...</h2>
-          <p class="user-info" id="userId"><strong>User ID:</strong> <span class="skeleton">Loading...</span></p>
-          <p class="user-info" id="userEmail"><strong>Email:</strong> <span class="skeleton">Loading...</span></p>
-          <p class="user-info" id="userUsername"><strong>Username:</strong> <span class="skeleton">Loading...</span></p>
-          <p class="user-info" id="userStudentId"><strong>Student ID:</strong> <span class="skeleton">Loading...</span>
-          </p>
-          <p class="user-info" id="userUniversity"><strong>University:</strong> <span class="skeleton">Loading...</span>
-          </p>
-          <p class="user-info" id="userStatus"><strong>Verification:</strong> <span class="skeleton">Loading...</span>
-          </p>
-          <p class="user-info" id="userRole"><strong>Role:</strong> <span class="skeleton">Loading...</span></p>
-          <p class="user-rating" id="userRating"><strong>Your Rating:</strong> <span class="skeleton">Loading...</span>
-          </p>
+    <!-- User Name -->
+    <h2 class="user-name-main" id="userName">Loading your profile...</h2>
 
-          <div class="profile-buttons">
-            <button class="btn-edit">Edit Profile</button>
-            <button class="btn-notifications">Notifications</button>
-            <button class="btn-verify" id="btnVerify" title="Upload university ID card for identification">
-              <i class="fas fa-check-circle"></i> Verify
-            </button>
-            <input type="file" id="verificationUpload" accept="image/*" style="display: none;">
-          </div>
+    <!-- Stats Boxes -->
+    <div class="profile-stats-main">
+      <div class="stat-box">
+        <h3>Total Funds Collected</h3>
+        <div class="stat-value" id="totalFundsCollected">৳0</div>
+      </div>
+      <div class="stat-box">
+        <h3>Total Loans Collected</h3>
+        <div class="stat-value" id="totalLoansCollected">৳0</div>
+      </div>
+    </div>
+
+    <!-- Additional User Information -->
+    <div class="additional-info-section">
+      <h3 class="info-section-title">
+        <i class="fas fa-info-circle" style="margin-right: 8px;"></i>
+        Additional User Information
+      </h3>
+      <div class="info-grid">
+        <div class="info-item">
+          <span class="info-label">User ID:</span>
+          <span class="info-value" id="userId"><span class="skeleton">Loading...</span></span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Email:</span>
+          <span class="info-value" id="userEmail"><span class="skeleton">Loading...</span></span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Username:</span>
+          <span class="info-value" id="userUsername"><span class="skeleton">Loading...</span></span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Student ID:</span>
+          <span class="info-value" id="userStudentId"><span class="skeleton">Loading...</span></span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">University:</span>
+          <span class="info-value" id="userUniversity"><span class="skeleton">Loading...</span></span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Verification:</span>
+          <span class="info-value" id="userStatus"><span class="skeleton">Loading...</span></span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Role:</span>
+          <span class="info-value" id="userRole"><span class="skeleton">Loading...</span></span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Your Rating:</span>
+          <span class="info-value" id="userRating"><span class="skeleton">Loading...</span></span>
         </div>
       </div>
 
-      <div class="profile-stats">
-        <div class="stat-box">
-          <h3>Total Funds Collected</h3>
-          <div class="stat-value" id="totalFundsCollected">৳0</div>
-        </div>
-        <div class="stat-box">
-          <h3>Total Loans Collected</h3>
-          <div class="stat-value" id="totalLoansCollected">৳0</div>
-        </div>
+      <div class="profile-buttons">
+        <button class="btn-edit">Edit Profile</button>
+        <button class="btn-notifications">Notifications</button>
+        <button class="btn-verify" id="btnVerify" title="Provide your university ID or national ID for verification">
+          <i class="fas fa-check-circle"></i> Verify
+        </button>
+        <input type="file" id="verificationUpload" accept="image/*" style="display: none;">
       </div>
     </div>
 

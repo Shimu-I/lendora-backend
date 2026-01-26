@@ -7,7 +7,9 @@ let userData = null;
 
 async function loadUserProfile() {
     try {
-        const response = await fetch('api/api-get-user-profile.php');
+        const response = await fetch('api/api-get-user-profile.php', {
+            credentials: 'include'
+        });
         const data = await response.json();
 
         if (data.success) {
@@ -31,25 +33,31 @@ async function loadUserProfile() {
 function displayUserProfile(data) {
     const { user, rating, stats } = data;
 
-    // Update profile header with N/A fallbacks and formatted labels
-    document.getElementById('userName').textContent = user.full_name || 'User Profile';
-    document.getElementById('userId').innerHTML = `<strong>User ID:</strong> ${user.user_id || 'N/A'}`;
-    document.getElementById('userEmail').innerHTML = `<strong>Email:</strong> ${user.email || 'N/A'}`;
-    document.getElementById('userUsername').innerHTML = `<strong>Username:</strong> ${user.username || 'N/A'}`;
-    document.getElementById('userStudentId').innerHTML = `<strong>Student ID:</strong> ${user.student_id || 'N/A'}`;
-    document.getElementById('userUniversity').innerHTML = `<strong>University:</strong> ${user.university || 'N/A'}`;
+    // Update user name at top with verified badge
+    const verifiedBadge = user.verification_status === 'verified'
+        ? ' <i class="fas fa-check-circle verified-badge" title="Verified User"></i>'
+        : '';
+    document.getElementById('userName').innerHTML = (user.full_name || 'User Profile') + verifiedBadge;
 
+    // Update all info items
+    document.getElementById('userId').textContent = user.user_id || 'N/A';
+    document.getElementById('userEmail').textContent = user.email || 'N/A';
+    document.getElementById('userUsername').textContent = user.username || 'N/A';
+    document.getElementById('userStudentId').textContent = user.student_id || 'N/A';
+    document.getElementById('userUniversity').textContent = user.university || 'N/A';
+
+    // Display status with color
     const statusText = user.verification_status ? user.verification_status.charAt(0).toUpperCase() + user.verification_status.slice(1) : 'N/A';
     const statusColor = user.verification_status === 'verified' ? '#70C1BF' : user.verification_status === 'rejected' ? '#dc4650' : '#f5b800';
-    document.getElementById('userStatus').innerHTML = `<strong>Verification:</strong> <span style="color: ${statusColor}">${statusText}</span>`;
+    document.getElementById('userStatus').innerHTML = `<span style="color: ${statusColor}">${statusText}</span>`;
 
-    document.getElementById('userRole').innerHTML = `<strong>Role:</strong> ${user.role ? user.role.charAt(0).toUpperCase() + user.role.slice(1) : 'N/A'}`;
+    document.getElementById('userRole').textContent = user.role ? user.role.charAt(0).toUpperCase() + user.role.slice(1) : 'N/A';
 
     // Display rating
     const ratingText = rating.avg_rating > 0
         ? `${rating.avg_rating}★ from ${rating.rating_count} reviews`
         : 'No ratings yet';
-    document.getElementById('userRating').innerHTML = `<strong>Your Rating:</strong> ${ratingText}`;
+    document.getElementById('userRating').textContent = ratingText;
 
     // Display stats
     document.getElementById('totalFundsCollected').textContent =
@@ -245,13 +253,13 @@ function setupEventListeners() {
 
         // Validate file type
         if (!file.type.startsWith('image/')) {
-            alert('Please select an image file');
+            showToast('Invalid File Type', 'Please select an image file (JPG, PNG, or GIF)', 'error');
             return;
         }
 
         // Validate file size (max 5MB)
         if (file.size > 5 * 1024 * 1024) {
-            alert('File size must be less than 5MB');
+            showToast('File Too Large', 'File size must be less than 5MB', 'error');
             return;
         }
 
@@ -265,20 +273,21 @@ function setupEventListeners() {
 
             const response = await fetch('api/api-upload-verification.php', {
                 method: 'POST',
-                body: formData
+                body: formData,
+                credentials: 'include'
             });
 
             const data = await response.json();
 
             if (data.success) {
-                alert('University ID card uploaded successfully! Your verification is pending admin approval.');
+                showToast('Verification Uploaded!', 'Your document has been submitted and is pending admin approval.', 'success');
                 loadUserProfile(); // Reload profile
             } else {
-                alert('Error: ' + data.error);
+                showToast('Upload Failed', data.error, 'error');
             }
         } catch (error) {
             console.error('Error:', error);
-            alert('Failed to upload verification document');
+            showToast('Upload Failed', 'Failed to upload verification document. Please try again.', 'error');
         } finally {
             verifyBtn.disabled = false;
             verifyBtn.innerHTML = '<i class="fas fa-check-circle"></i> Verify';
@@ -296,7 +305,8 @@ function setupEventListeners() {
         try {
             const response = await fetch('api/api-update-user-profile.php', {
                 method: 'POST',
-                body: formData
+                body: formData,
+                credentials: 'include'
             });
 
             const data = await response.json();
@@ -321,4 +331,32 @@ function setupEventListeners() {
 
 function viewLoanDetails(loanId) {
     window.location = `loan.html#loan-${loanId}`;
+}
+
+// Toast notification function
+function showToast(title, message, type = 'success') {
+    const toast = document.createElement('div');
+    toast.className = `success-toast ${type === 'error' ? 'error-toast' : ''}`;
+
+    const icon = type === 'success'
+        ? '<i class="fas fa-check-circle toast-icon"></i>'
+        : '<i class="fas fa-exclamation-circle toast-icon"></i>';
+
+    toast.innerHTML = `
+        ${icon}
+        <div class="toast-content">
+            <h4>${title}</h4>
+            <p>${message}</p>
+        </div>
+        <button class="toast-close" onclick="this.parentElement.remove()">
+            <i class="fas fa-times"></i>
+        </button>
+    `;
+
+    document.body.appendChild(toast);
+
+    setTimeout(() => {
+        toast.style.animation = 'slideOut 0.4s ease';
+        setTimeout(() => toast.remove(), 400);
+    }, 5000);
 }
