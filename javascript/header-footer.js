@@ -20,25 +20,21 @@ document.addEventListener("DOMContentLoaded", function () {
         headerPlaceholder.outerHTML = html;
 
         // ==== After header loads → activate correct nav item ====
-        setTimeout(() => {
-          const current = window.location.pathname.split("/").pop();
-          const links = document.querySelectorAll("nav a");
+        const current = window.location.pathname.split("/").pop();
+        const links = document.querySelectorAll("nav a");
 
-          links.forEach(a => {
-            if (a.getAttribute("href") === current) {
-              a.classList.add("active");
-            }
-          });
-        }, 20);
+        links.forEach(a => {
+          if (a.getAttribute("href") === current) {
+            a.classList.add("active");
+          }
+        });
 
         // ==== If user logged in → update avatar & name ====
         if (isLoggedIn) {
-          setTimeout(() => {
-            const nameEl = document.getElementById("userName");
-            const avatarEl = document.getElementById("userAvatar");
-            if (nameEl) nameEl.textContent = localStorage.getItem("userName") || "User";
-            if (avatarEl) avatarEl.src = localStorage.getItem("userAvatar") || avatarEl.src;
-          }, 50);
+          const nameEl = document.getElementById("userName");
+          const avatarEl = document.getElementById("userAvatar");
+          if (nameEl) nameEl.textContent = localStorage.getItem("userName") || "User";
+          if (avatarEl) avatarEl.src = localStorage.getItem("userAvatar") || avatarEl.src;
         }
       })
       .catch(err => {
@@ -84,30 +80,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 });
 
-// Page Fade Transition
-document.addEventListener("DOMContentLoaded", () => {
-  document.body.classList.add("fade-in");
-
-  // Make all internal links fade out before navigation
-  document.querySelectorAll("a[href]").forEach(link => {
-    link.addEventListener("click", e => {
-      const url = link.getAttribute("href");
-
-      // Ignore external, hash, or js links
-      if (!url || url.startsWith("http") || url.startsWith("#") || url.startsWith("javascript")) return;
-
-      e.preventDefault();
-      document.body.classList.remove("fade-in");
-
-      setTimeout(() => {
-        window.location.href = url;
-      }, 300); // match your CSS transition duration
-    });
-  });
-});
-
-
-// Logout function
 // Logout function
 function logout() {
   window.location.href = 'logout.php';

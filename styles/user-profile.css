@@ -7,15 +7,9 @@
 }
 
 
-/* Page fade animation */
+/* Page optimized for fast loading */
 body {
-  opacity: 0;
-  transition: opacity 0.4s ease;
   background-color: #0c1b23;
-}
-
-body.fade-in {
-  opacity: 1;
 }
 
 /* Profile Container */

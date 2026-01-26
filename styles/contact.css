@@ -1,16 +1,7 @@
-/* Page fade animation */
-body {
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-
-body.fade-in {
-  opacity: 1;
-}
-
+/* Optimized for fast loading */
 
 .contact-hero {
-  background: var(--bg-dark); 
+  background: var(--bg-dark);
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -47,7 +38,7 @@ body.fade-in {
   font-family: 'Roboto', sans-serif;
   font-size: 1.1rem;
   color: var(--text-dark);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .contact-form input::placeholder,
@@ -74,7 +65,7 @@ body.fade-in {
 .contact-image img {
   width: 580px;
   max-width: 100%;
-  
+
 }
 
 /* Logged-in User Profile in Header */
@@ -123,15 +114,26 @@ body.fade-in {
 @media (max-width: 992px) {
   .contact-container {
     flex-direction: column;
-    
+
     text-align: center;
     gap: 4rem;
   }
-  .contact-text h1 { font-size: 3.5rem; }
-  .contact-image img { width: 450px; }
+
+  .contact-text h1 {
+    font-size: 3.5rem;
+  }
+
+  .contact-image img {
+    width: 450px;
+  }
 }
 
 @media (max-width: 576px) {
-  .contact-text h1 { font-size: 3rem; }
-  .contact-image img { width: 320px; }
+  .contact-text h1 {
+    font-size: 3rem;
+  }
+
+  .contact-image img {
+    width: 320px;
+  }
 }
