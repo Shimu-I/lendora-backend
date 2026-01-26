@@ -19,6 +19,27 @@ document.addEventListener("DOMContentLoaded", function () {
       .then(html => {
         headerPlaceholder.outerHTML = html;
 
+        // Initialize page features that depend on header being present
+        // If the header contains a notification bell, ensure the notification script is loaded
+        if (document.querySelector('.notification-bell')) {
+          if (typeof initNotifications === 'function') {
+            try { initNotifications(); } catch (e) { console.error('initNotifications failed', e); }
+          } else {
+            // Load the notification script dynamically once
+            if (!document.querySelector('script[data-notif-script]')) {
+              const s = document.createElement('script');
+              s.src = 'javascript/notification-count.js';
+              s.setAttribute('data-notif-script', '1');
+              s.onload = function() {
+                if (typeof initNotifications === 'function') {
+                  try { initNotifications(); } catch (e) { console.error('initNotifications failed', e); }
+                }
+              };
+              document.body.appendChild(s);
+            }
+          }
+        }
+
         // ==== After header loads → activate correct nav item ====
         const current = window.location.pathname.split("/").pop();
         const links = document.querySelectorAll("nav a");

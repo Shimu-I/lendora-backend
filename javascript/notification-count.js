@@ -1,8 +1,10 @@
-// Load notification count on page load
-document.addEventListener('DOMContentLoaded', function() {
+// Initialize notifications — exposed so header loader can call it after header injection
+function initNotifications() {
+    // Load initial count and refresh periodically
     loadNotificationCount();
     // Refresh count every 30 seconds
-    setInterval(loadNotificationCount, 30000);
+    if (window._notificationInterval) clearInterval(window._notificationInterval);
+    window._notificationInterval = setInterval(loadNotificationCount, 30000);
 
     // Show notification dropdown automatically after login (if logged in)
     if (window.localStorage.getItem('isLoggedIn') === 'true') {
@@ -12,18 +14,25 @@ document.addEventListener('DOMContentLoaded', function() {
                 dropdown.classList.add('active');
                 loadNotificationDropdown();
             }
-        }, 800); // slight delay to ensure header loads
+        }, 300); // slight delay to ensure header content is fully parsed
     }
 
     // Close dropdown when clicking outside
     document.addEventListener('click', function(e) {
         const dropdown = document.getElementById('notificationDropdown');
         const bell = document.querySelector('.notification-bell');
-        if (dropdown && !dropdown.contains(e.target) && !bell.contains(e.target)) {
+        if (dropdown && bell && !dropdown.contains(e.target) && !bell.contains(e.target)) {
             dropdown.classList.remove('active');
         }
     });
-});
+}
+
+// Auto-init if header already present when script loads
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initNotifications);
+} else {
+    initNotifications();
+}
 
 async function loadNotificationCount() {
     try {
