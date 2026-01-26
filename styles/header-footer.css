@@ -27,7 +27,7 @@ header::after {
 }
 
 .logo {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   font-weight: bold;
   display: flex;
   align-items: center;
@@ -69,7 +69,7 @@ nav a:hover {
 /* Smooth transition for active page */
 nav a {
   border-bottom: 2px solid transparent;
-  transition: 
+  transition:
     color 0.3s ease,
     border-bottom-color 0.3s ease;
 }
@@ -130,7 +130,7 @@ nav a.active {
   display: flex;
   align-items: center;
   gap: 0.8rem;
-  background: rgba(0,212,194,0.15);
+  background: rgba(0, 212, 194, 0.15);
   padding: 0.5rem 1rem;
   padding-right: 1.2rem;
   border-radius: 50px;
