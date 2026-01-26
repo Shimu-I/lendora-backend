@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="styles/admin-dashboard.css">
   <link rel="stylesheet" href="styles/admin-sidebar.css">
   <link rel="stylesheet" href="styles/index.css">
@@ -16,36 +17,106 @@
   <!-- Header -->
   <div id="headerPlaceholder"></div>
 
-
-
-
-  <!-- every thing else -->
+  <!-- Sidebar -->
   <div id="admin-sidebar"></div>
 
   <div class="container">
     <main class="main-content">
-      <div class="dashboard-card">
-        <h1 class="dashboard-title">Admin Dashboard</h1>
+      <h1 class="page-title">Dashboard Overview</h1>
 
-        <h2 class="stats-section-title">Stats Cards</h2>
-
-        <div class="stats-cards">
-          <div class="stat-card">
-            <div class="stat-label">Total<br>Users</div>
-            <div class="stat-value">4,521</div>
+      <!-- Top Stats Row -->
+      <div class="stats-grid">
+        <div class="stat-card stat-users">
+          <div class="stat-icon"><i class="fas fa-users"></i></div>
+          <div class="stat-info">
+            <div class="stat-value" id="totalUsers">0</div>
+            <div class="stat-label">Total Users</div>
           </div>
+        </div>
 
-          <div class="stat-card">
-            <div class="stat-label">Active Loan<br>Requests</div>
-            <div class="stat-value">182</div>
+        <div class="stat-card stat-loans">
+          <div class="stat-icon"><i class="fas fa-hand-holding-usd"></i></div>
+          <div class="stat-info">
+            <div class="stat-value" id="totalLoans">0</div>
+            <div class="stat-label">Total Loans</div>
           </div>
+        </div>
 
-          <div class="stat-card">
-            <div class="stat-label">Active<br>Fundraisers</div>
-            <div class="stat-value">64</div>
+        <div class="stat-card stat-funding">
+          <div class="stat-icon"><i class="fas fa-donate"></i></div>
+          <div class="stat-info">
+            <div class="stat-value" id="totalFunding">0</div>
+            <div class="stat-label">Fundraisers</div>
+          </div>
+        </div>
+
+        <div class="stat-card stat-money">
+          <div class="stat-icon"><i class="fas fa-sack-dollar"></i></div>
+          <div class="stat-info">
+            <div class="stat-value" id="totalAmount">৳0</div>
+            <div class="stat-label">Total Disbursed</div>
           </div>
         </div>
       </div>
+
+      <!-- Pending Requests -->
+      <div class="section-title">Pending Requests</div>
+      <div class="pending-grid">
+        <div class="pending-card pending-loans">
+          <div class="pending-header">
+            <i class="fas fa-file-invoice-dollar"></i>
+            <span>Pending Loans</span>
+          </div>
+          <div class="pending-value" id="pendingLoans">0</div>
+          <a href="admin-loan-requests.html" class="pending-link">View All <i class="fas fa-arrow-right"></i></a>
+        </div>
+
+        <div class="pending-card pending-fundraisers">
+          <div class="pending-header">
+            <i class="fas fa-hands-helping"></i>
+            <span>Pending Fundraisers</span>
+          </div>
+          <div class="pending-value" id="pendingFunding">0</div>
+          <a href="admin-fundraisers.html" class="pending-link">View All <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <!-- Activity Stats -->
+      <div class="section-title">Activity Overview</div>
+      <div class="activity-grid">
+        <div class="activity-card">
+          <div class="activity-icon"><i class="fas fa-check-circle"></i></div>
+          <div class="activity-info">
+            <div class="activity-value" id="approvedLoans">0</div>
+            <div class="activity-label">Approved Loans</div>
+          </div>
+        </div>
+
+        <div class="activity-card">
+          <div class="activity-icon"><i class="fas fa-chart-line"></i></div>
+          <div class="activity-info">
+            <div class="activity-value" id="activeFunding">0</div>
+            <div class="activity-label">Active Fundraisers</div>
+          </div>
+        </div>
+
+        <div class="activity-card">
+          <div class="activity-icon"><i class="fas fa-money-bill-wave"></i></div>
+          <div class="activity-info">
+            <div class="activity-value" id="totalContributions">0</div>
+            <div class="activity-label">Total Contributions</div>
+          </div>
+        </div>
+
+        <div class="activity-card">
+          <div class="activity-icon"><i class="fas fa-user-check"></i></div>
+          <div class="activity-info">
+            <div class="activity-value" id="verifiedUsers">0</div>
+            <div class="activity-label">Verified Users</div>
+          </div>
+        </div>
+      </div>
+
     </main>
   </div>
 

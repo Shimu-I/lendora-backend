@@ -1,6 +1,39 @@
 document.addEventListener('DOMContentLoaded', function () {
     loadLoanRequests();
+    setupSearchFilter();
 });
+
+function setupSearchFilter() {
+    const searchInput = document.getElementById('searchInput');
+    const clearBtn = document.getElementById('clearSearch');
+
+    if (searchInput) {
+        searchInput.addEventListener('input', function (e) {
+            const searchTerm = e.target.value.toLowerCase();
+            clearBtn.style.display = searchTerm ? 'block' : 'none';
+
+            const items = document.querySelectorAll('.request-item');
+            items.forEach(item => {
+                const searchData = item.getAttribute('data-search') || '';
+                if (searchData.includes(searchTerm)) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    }
+
+    if (clearBtn) {
+        clearBtn.addEventListener('click', function () {
+            searchInput.value = '';
+            clearBtn.style.display = 'none';
+            document.querySelectorAll('.request-item').forEach(item => {
+                item.style.display = 'flex';
+            });
+        });
+    }
+}
 
 async function loadLoanRequests() {
     const container = document.querySelector('.requests-list');
@@ -52,40 +85,35 @@ async function loadLoanRequests() {
 function createLoanCard(loan) {
     const initials = loan.full_name ? loan.full_name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() : 'NA';
     const dateCreated = new Date(loan.created_at).toLocaleDateString('en-US', {
-        year: 'numeric',
         month: 'short',
-        day: 'numeric'
+        day: 'numeric',
+        year: 'numeric'
     });
 
     return `
-        <div class="request-item">
-            <div class="request-header">
-                <div class="request-id">#${loan.loan_id}</div>
-                <div class="user-avatar" style="display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 18px; color: white;">${initials}</div>
-                <div class="request-info">
-                    <div class="user-name">${loan.full_name || 'Unknown User'}</div>
-                    <div class="user-email">${loan.email || 'No email'}</div>
-                </div>
+        <div class="request-item" data-search="${loan.full_name?.toLowerCase()} ${loan.email?.toLowerCase()} ${loan.category?.toLowerCase()}">
+            <div class="request-id">#${loan.loan_id}</div>
+            <div class="user-avatar">${initials}</div>
+            <div class="user-info">
+                <div class="user-name">${loan.full_name || 'Unknown User'}</div>
+                <div class="user-email">${loan.email || 'No email'}</div>
             </div>
+            <div class="info-badge">${loan.category || 'N/A'}</div>
+            <div class="info-badge">৳${parseFloat(loan.amount).toLocaleString()}</div>
+            <div class="info-badge">${dateCreated}</div>
+            <div class="info-badge">${loan.document_count || 0} docs</div>
             
-            <div class="request-details">
-                <span class="detail-item"><strong>Category:</strong> ${loan.category || 'N/A'}</span>
-                <span class="detail-item"><strong>Amount:</strong> ৳${parseFloat(loan.amount).toLocaleString()}</span>
-                <span class="detail-item"><strong>Date:</strong> ${dateCreated}</span>
-                <span class="detail-item"><strong>Documents:</strong> ${loan.document_count || 0} files</span>
-            </div>
-
             <div class="request-actions">
                 <a href="admin-views-loan-users-uploads.html?loan_id=${loan.loan_id}" class="btn btn-view">
-                    <i class="fas fa-file-alt"></i> View Documents (${loan.document_count || 0})
+                    View (${loan.document_count || 0})
                 </a>
                 
                 ${loan.status === 'pending' ? `
                     <button class="btn btn-approve" data-id="${loan.loan_id}" data-action="approve">
-                        <i class="fas fa-check"></i> Approve
+                        Approve
                     </button>
                     <button class="btn btn-decline" data-id="${loan.loan_id}" data-action="reject">
-                        <i class="fas fa-times"></i> Decline
+                        Decline
                     </button>
                 ` : `
                     <span class="status-badge status-${loan.status}">

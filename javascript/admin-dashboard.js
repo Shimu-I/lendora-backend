@@ -8,18 +8,26 @@ async function loadDashboardStats() {
         const response = await fetch('api-admin-stats.php');
         const data = await response.json();
 
+        console.log('Dashboard stats:', data);
+
         if (data.success) {
-            // Update stat cards
-            const statCards = document.querySelectorAll('.stat-card');
-            if (statCards[0]) {
-                statCards[0].querySelector('.stat-value').textContent = data.stats.total_users.toLocaleString();
-            }
-            if (statCards[1]) {
-                statCards[1].querySelector('.stat-value').textContent = data.stats.active_loans.toLocaleString();
-            }
-            if (statCards[2]) {
-                statCards[2].querySelector('.stat-value').textContent = data.stats.active_funding.toLocaleString();
-            }
+            const stats = data.stats;
+
+            // Top stats
+            document.getElementById('totalUsers').textContent = stats.total_users.toLocaleString();
+            document.getElementById('totalLoans').textContent = stats.total_loans.toLocaleString();
+            document.getElementById('totalFunding').textContent = stats.total_funding.toLocaleString();
+            document.getElementById('totalAmount').textContent = '৳' + (stats.total_disbursed || 0).toLocaleString();
+
+            // Pending requests
+            document.getElementById('pendingLoans').textContent = stats.pending_loans.toLocaleString();
+            document.getElementById('pendingFunding').textContent = stats.pending_funding.toLocaleString();
+
+            // Activity stats
+            document.getElementById('approvedLoans').textContent = stats.approved_loans.toLocaleString();
+            document.getElementById('activeFunding').textContent = stats.active_funding.toLocaleString();
+            document.getElementById('totalContributions').textContent = (stats.total_contributions || 0).toLocaleString();
+            document.getElementById('verifiedUsers').textContent = (stats.verified_users || 0).toLocaleString();
         } else {
             console.error('Failed to load stats:', data.error);
         }

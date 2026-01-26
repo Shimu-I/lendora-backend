@@ -13,14 +13,8 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
     background-color: #0a3940;
     color: #fff;
-    opacity: 0;
-    transition: opacity 0.4s ease;
     overflow-x: hidden;
     max-width: 100vw;
-}
-
-body.fade-in {
-    opacity: 1;
 }
 
 /* Main Container */
@@ -28,7 +22,6 @@ body.fade-in {
     display: flex;
     min-height: calc(100vh - 85px);
     padding-left: 280px;
-    /* Space for sidebar */
     padding-top: 20px;
     max-width: 100vw;
     overflow-x: hidden;
@@ -36,85 +29,223 @@ body.fade-in {
 
 .main-content {
     flex: 1;
-    padding: 20px;
-    max-width: 1400px;
-    margin: 0 auto;
+    padding: 24px 30px;
+    max-width: 1600px;
     width: 100%;
 }
 
-.dashboard-card {
-    border: 1px solid #1a4f5a;
-    border-radius: 12px;
-    padding: 40px;
-    background-color: rgba(26, 79, 90, 0.2);
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.dashboard-title {
-    text-align: center;
-    font-size: 36px;
+.page-title {
+    font-size: 26px;
     font-weight: 600;
-    margin-bottom: 40px;
+    margin-bottom: 24px;
     color: #fff;
+    padding-bottom: 10px;
+    border-bottom: 2px solid rgba(125, 211, 192, 0.3);
 }
 
-.stats-section-title {
-    text-align: center;
-    font-size: 28px;
+.section-title {
+    font-size: 16px;
     font-weight: 600;
-    margin-bottom: 30px;
-    color: #fff;
-}
-
-/* Stats Cards */
-.stats-cards {
+    margin: 24px 0 14px 0;
+    color: #7dd3c0;
     display: flex;
-    justify-content: center;
-    gap: 30px;
-    flex-wrap: wrap;
-    padding: 20px 0;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Stats Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin-bottom: 20px;
 }
 
 .stat-card {
-    background-color: #7dd3c0;
-    padding: 40px 50px;
-    border-radius: 8px;
-    text-align: center;
-    min-width: 180px;
-    flex: 1;
-    max-width: 280px;
-    transition: transform 0.3s;
+    background: linear-gradient(135deg, rgba(26, 79, 90, 0.4), rgba(26, 79, 90, 0.2));
+    border: 1px solid rgba(125, 211, 192, 0.2);
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: all 0.3s;
 }
 
 .stat-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(125, 211, 192, 0.3);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    border-color: #7dd3c0;
 }
 
-.stat-label {
+.stat-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+}
+
+.stat-users .stat-icon {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #fff;
+}
+
+.stat-loans .stat-icon {
+    background: linear-gradient(135deg, #f093fb, #f5576c);
+    color: #fff;
+}
+
+.stat-funding .stat-icon {
+    background: linear-gradient(135deg, #4facfe, #00f2fe);
+    color: #fff;
+}
+
+.stat-money .stat-icon {
+    background: linear-gradient(135deg, #43e97b, #38f9d7);
     color: #0a3940;
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 15px;
-    line-height: 1.4;
+}
+
+.stat-info {
+    flex: 1;
 }
 
 .stat-value {
-    color: #0a3940;
-    font-size: 42px;
+    font-size: 28px;
     font-weight: 700;
+    color: #fff;
+    line-height: 1.2;
+    margin-bottom: 4px;
+}
+
+.stat-label {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 500;
+}
+
+/* Pending Grid */
+.pending-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.pending-card {
+    background: rgba(26, 79, 90, 0.3);
+    border: 1px solid rgba(125, 211, 192, 0.2);
+    border-radius: 8px;
+    padding: 18px;
+    transition: all 0.3s;
+}
+
+.pending-card:hover {
+    border-color: #7dd3c0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.pending-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 12px;
+    font-weight: 500;
+}
+
+.pending-header i {
+    font-size: 16px;
+    color: #7dd3c0;
+}
+
+.pending-value {
+    font-size: 32px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.pending-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #7dd3c0;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    transition: gap 0.2s;
+}
+
+.pending-link:hover {
+    gap: 10px;
+}
+
+.pending-link i {
+    font-size: 11px;
+}
+
+/* Activity Grid */
+.activity-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 14px;
+}
+
+.activity-card {
+    background: rgba(26, 79, 90, 0.25);
+    border: 1px solid rgba(125, 211, 192, 0.15);
+    border-radius: 8px;
+    padding: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.2s;
+}
+
+.activity-card:hover {
+    background: rgba(26, 79, 90, 0.35);
+    border-color: rgba(125, 211, 192, 0.3);
+}
+
+.activity-icon {
+    width: 44px;
+    height: 44px;
+    background: rgba(125, 211, 192, 0.15);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #7dd3c0;
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+.activity-info {
+    flex: 1;
+}
+
+.activity-value {
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.2;
+}
+
+.activity-label {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 2px;
 }
 
 /* Responsive Design */
 @media (max-width: 1200px) {
     .container {
         padding-left: 260px;
-    }
-
-    .dashboard-card {
-        padding: 30px;
     }
 }
 
@@ -128,25 +259,15 @@ body.fade-in {
         padding: 15px;
     }
 
-    .dashboard-card {
-        padding: 20px;
-    }
-
-    .dashboard-title {
-        font-size: 28px;
-        margin-bottom: 30px;
-    }
-
-    .stats-section-title {
+    .page-title {
         font-size: 24px;
     }
 
-    .stat-card {
-        min-width: 150px;
-        padding: 30px 40px;
+    .stats-grid {
+        grid-template-columns: 1fr;
     }
 
     .stat-value {
-        font-size: 36px;
+        font-size: 28px;
     }
 }

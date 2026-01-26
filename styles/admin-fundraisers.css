@@ -37,51 +37,101 @@ body {
 }
 
 .dashboard-card {
-  border: 1px solid #1a4f5a;
-  border-radius: 12px;
-  padding: 30px;
-  background-color: rgba(26, 79, 90, 0.2);
+  border: 1px solid rgba(125, 211, 192, 0.2);
+  border-radius: 10px;
+  padding: 24px;
+  background-color: rgba(26, 79, 90, 0.15);
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .loan-request-body {
-  border: 1px solid #1a4f5a;
-  border-radius: 12px;
-  padding: 30px;
-  background-color: rgba(26, 79, 90, 0.2);
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  background-color: transparent;
   width: 100%;
 }
 
 .page-title {
-  text-align: center;
-  font-size: 32px;
+  text-align: left;
+  font-size: 24px;
   font-weight: 600;
-  margin-bottom: 30px;
+  margin-bottom: 16px;
   color: #fff;
+  padding-bottom: 12px;
+  border-bottom: 2px solid rgba(125, 211, 192, 0.3);
+}
+
+/* Search Bar */
+.search-container {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px 40px 10px 16px;
+  background-color: rgba(26, 79, 90, 0.3);
+  border: 1px solid rgba(125, 211, 192, 0.3);
+  border-radius: 6px;
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.search-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.search-input:focus {
+  border-color: #7dd3c0;
+  background-color: rgba(26, 79, 90, 0.5);
+}
+
+.search-clear {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #7dd3c0;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.search-clear:hover {
+  background-color: rgba(125, 211, 192, 0.2);
 }
 
 .requests-list {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 6px;
   width: 100%;
 }
 
-/* Fixed Request Card Design - No Overlapping */
+/* Compact Single-Line Card */
 .request-item {
-  background-color: rgba(26, 79, 90, 0.4);
-  border: 1px solid #1a4f5a;
-  border-radius: 12px;
-  padding: 20px;
+  background-color: rgba(26, 79, 90, 0.25);
+  border: 1px solid rgba(125, 211, 192, 0.15);
+  border-radius: 6px;
+  padding: 8px 12px;
   display: flex;
-  flex-direction: column;
-  gap: 15px;
-  transition: all 0.3s;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.2s;
   position: relative;
   width: 100%;
-  margin-bottom: 10px;
+  min-height: 42px;
 }
 
 .request-item:hover {
@@ -95,101 +145,119 @@ body {
 .request-header {
   display: flex;
   align-items: center;
-  gap: 15px;
-  padding-bottom: 15px;
-  border-bottom: 1px solid rgba(125, 211, 192, 0.2);
-  width: 100%;
+  gap: 10px;
+  flex-shrink: 0;
 }
 
 .request-id {
-  font-size: 20px;
-  font-weight: 700;
+  font-size: 11px;
+  font-weight: 600;
   color: #7dd3c0;
-  background-color: rgba(125, 211, 192, 0.1);
-  padding: 8px 16px;
-  border-radius: 8px;
-  min-width: 60px;
+  background-color: rgba(125, 211, 192, 0.12);
+  padding: 4px 8px;
+  border-radius: 4px;
+  min-width: 36px;
   text-align: center;
+  flex-shrink: 0;
 }
 
 .user-avatar {
-  width: 50px;
-  height: 50px;
-  background-color: #e09191;
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #7dd3c0, #5ab3a0);
   border-radius: 50%;
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  font-weight: bold;
-  font-size: 18px;
+  font-weight: 600;
+  font-size: 13px;
+  box-shadow: 0 2px 6px rgba(125, 211, 192, 0.25);
 }
 
-.request-info {
-  flex: 1;
+.user-info {
+  flex: 0 0 200px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 2px;
+  min-width: 0;
 }
 
 .user-name {
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 500;
   color: #fff;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .user-email {
-  font-size: 14px;
-  color: #a0c4c7;
-}
-
-.username {
-  font-size: 16px;
-  font-weight: 600;
-  color: #fff;
-}
-
-/* Details Section */
-.request-details {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  padding: 10px 0;
-  width: 100%;
-}
-
-.detail-item {
-  font-size: 13px;
+  font-size: 10px;
   color: #7dd3c0;
-  background-color: rgba(125, 211, 192, 0.1);
-  padding: 6px 14px;
-  border-radius: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
   white-space: nowrap;
-  font-weight: 500;
 }
 
-.detail-item strong {
+/* Info Badges - Inline */
+.info-badge {
+  font-size: 11px;
   color: #fff;
-  margin-right: 5px;
+  background-color: rgba(125, 211, 192, 0.08);
+  padding: 4px 10px;
+  border-radius: 4px;
+  white-space: nowrap;
+  font-weight: 400;
+  flex-shrink: 0;
+}
+
+/* Mini Progress Bar */
+.progress-mini {
+  width: 60px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.progress-bar-mini {
+  height: 100%;
+  background: linear-gradient(90deg, #00d9ff, #00a86b);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+/* Remove old styles */
+.request-header,
+.request-details,
+.detail-item,
+.username,
+.request-info,
+.progress-container,
+.progress-bar,
+.progress-fill,
+.progress-label {
+  display: none;
 }
 
 /* Progress Bar */
 .progress-container {
-  margin-top: 15px;
+  flex: 0 0 120px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .progress-label {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 8px;
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 14px;
+  display: none;
 }
 
 .progress-bar {
-  width: 100%;
-  height: 8px;
+  width: 100px;
+  height: 5px;
   background: rgba(255, 255, 255, 0.1);
   border-radius: 10px;
   overflow: hidden;
@@ -205,39 +273,36 @@ body {
 /* Actions Section */
 .request-actions {
   display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  padding-top: 10px;
-  width: 100%;
+  gap: 8px;
+  flex-shrink: 0;
+  margin-left: auto;
 }
 
-.btn {
-  padding: 10px 20px;
+.request-actions .btn {
+  padding: 5px 10px !important;
   border: none;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 600;
+  border-radius: 4px !important;
+  font-size: 11px !important;
+  font-weight: 500;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: all 0.2s;
   text-decoration: none;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 3px;
   white-space: nowrap;
-  flex: 1;
-  min-width: 130px;
+  min-width: 70px;
 }
 
 .btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
 }
 
 .btn-view {
-  background-color: #d0d0d0;
+  background-color: #c8c8c8;
   color: #0a3940;
-  flex: 1.5;
 }
 
 .btn-view:hover {

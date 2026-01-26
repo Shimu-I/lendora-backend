@@ -1,6 +1,39 @@
 document.addEventListener('DOMContentLoaded', function () {
     loadFundraisers();
+    setupSearchFilter();
 });
+
+function setupSearchFilter() {
+    const searchInput = document.getElementById('searchInput');
+    const clearBtn = document.getElementById('clearSearch');
+
+    if (searchInput) {
+        searchInput.addEventListener('input', function (e) {
+            const searchTerm = e.target.value.toLowerCase();
+            clearBtn.style.display = searchTerm ? 'block' : 'none';
+
+            const items = document.querySelectorAll('.request-item');
+            items.forEach(item => {
+                const searchData = item.getAttribute('data-search') || '';
+                if (searchData.includes(searchTerm)) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    }
+
+    if (clearBtn) {
+        clearBtn.addEventListener('click', function () {
+            searchInput.value = '';
+            clearBtn.style.display = 'none';
+            document.querySelectorAll('.request-item').forEach(item => {
+                item.style.display = 'flex';
+            });
+        });
+    }
+}
 
 async function loadFundraisers() {
     const container = document.querySelector('.requests-list');
@@ -51,53 +84,40 @@ async function loadFundraisers() {
 function createFundraiserCard(post) {
     const initials = post.full_name ? post.full_name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() : 'NA';
     const dateCreated = new Date(post.created_at).toLocaleDateString('en-US', {
-        year: 'numeric',
         month: 'short',
-        day: 'numeric'
+        day: 'numeric',
+        year: 'numeric'
     });
-    const progress = (post.amount_raised / post.amount_needed * 100).toFixed(1);
+    const progress = (post.amount_raised / post.amount_needed * 100).toFixed(0);
     const category = post.custom_category || post.category || 'N/A';
 
     return `
-        <div class="request-item">
-            <div class="request-header">
-                <div class="request-id">#${post.post_id}</div>
-                <div class="user-avatar">${initials}</div>
-                <div class="request-info">
-                    <div class="user-name">${post.title || 'Untitled'}</div>
-                    <div class="user-email">By: ${post.full_name} (${post.email})</div>
-                </div>
+        <div class="request-item" data-search="${post.title?.toLowerCase()} ${post.full_name?.toLowerCase()} ${post.email?.toLowerCase()} ${category?.toLowerCase()}">
+            <div class="request-id">#${post.post_id}</div>
+            <div class="user-avatar">${initials}</div>
+            <div class="user-info">
+                <div class="user-name">${post.title || 'Untitled'}</div>
+                <div class="user-email">By: ${post.full_name}</div>
+            </div>
+            <div class="info-badge">${category}</div>
+            <div class="info-badge">৳${parseFloat(post.amount_needed).toLocaleString()}</div>
+            <div class="info-badge">${dateCreated}</div>
+            <div class="info-badge">${post.document_count || 0} docs</div>
+            <div class="progress-mini">
+                <div class="progress-bar-mini" style="width: ${Math.min(progress, 100)}%"></div>
             </div>
             
-            <div class="request-details">
-                <span class="detail-item"><strong>Category:</strong> ${category}</span>
-                <span class="detail-item"><strong>Goal:</strong> ৳${parseFloat(post.amount_needed).toLocaleString()}</span>
-                <span class="detail-item"><strong>Raised:</strong> ৳${parseFloat(post.amount_raised).toLocaleString()}</span>
-                <span class="detail-item"><strong>Date:</strong> ${dateCreated}</span>
-                <span class="detail-item"><strong>Documents:</strong> ${post.document_count || 0} files</span>
-            </div>
-
-            <div class="progress-container">
-                <div class="progress-label">
-                    <span>Progress</span>
-                    <span>${progress}%</span>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: ${Math.min(progress, 100)}%"></div>
-                </div>
-            </div>
-
             <div class="request-actions">
                 <a href="admin-views-funding-users-uploads.html?post_id=${post.post_id}" class="btn btn-view">
-                    <i class="fas fa-file-alt"></i> View Documents (${post.document_count || 0})
+                    View (${post.document_count || 0})
                 </a>
                 
                 ${post.status === 'pending' ? `
                     <button class="btn btn-approve" data-id="${post.post_id}" data-action="approve">
-                        <i class="fas fa-check"></i> Approve
+                        Approve
                     </button>
                     <button class="btn btn-decline" data-id="${post.post_id}" data-action="reject">
-                        <i class="fas fa-times"></i> Decline
+                        Decline
                     </button>
                 ` : `
                     <span class="status-badge status-${post.status}">
