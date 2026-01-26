@@ -21,6 +21,7 @@ try {
                 u.full_name,
                 u.email,
                 u.profile_image,
+                u.verification_status,
                 COALESCE(SUM(cc.amount), 0) as amount_raised,
                 (
                     SELECT file_path 

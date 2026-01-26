@@ -72,11 +72,21 @@ h1 {
     margin: 4px 0;
 }
 
+.cover-upload-btn,
 #coverPhotoBtn {
     background-color: #7dd3d3;
     color: #0a2e2e;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.95em;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
 }
 
+.cover-upload-btn:hover,
 #coverPhotoBtn:hover {
     background-color: #6bc4c4;
 }
@@ -178,6 +188,14 @@ h1 {
     font-size: 14px;
     font-family: inherit;
     color: #333;
+}
+
+.char-counter {
+    font-size: 12px;
+    color: #00bfa5;
+    margin-top: 5px;
+    text-align: right;
+    font-weight: 500;
 }
 
 /* Main full-width inputs - now targeted by class instead of type */

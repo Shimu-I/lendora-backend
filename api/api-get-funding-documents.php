@@ -27,7 +27,7 @@ try {
                 fd.mime_type,
                 fd.verified,
                 fd.uploaded_at
-            FROM funding_documents fd
+            FROM crowdfunding_documents fd
             WHERE fd.post_id = :post_id
             ORDER BY fd.uploaded_at DESC";
 

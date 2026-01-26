@@ -113,21 +113,22 @@ if (isset($_POST['submit_fundraiser'])) {
 
             if (in_array($ext, $allowed_images)) {
                 $new_filename = uniqid() . "_cover_" . $filename;
-                $path = "images/uploads/funding/" . $new_filename;
+                $path = "../images/uploads/funding/" . $new_filename;
 
                 // Create directory if not exists
-                if (!file_exists("images/uploads/funding/")) {
-                    mkdir("images/uploads/funding/", 0777, true);
+                if (!file_exists("../images/uploads/funding/")) {
+                    mkdir("../images/uploads/funding/", 0777, true);
                 }
 
                 if (move_uploaded_file($filetmp, $path)) {
-                    // Insert cover photo as document with doc_type='other'
+                    // Insert cover photo as document with doc_type='other' - store path without ../
+                    $db_path = "images/uploads/funding/" . $new_filename;
                     $doc_sql = "INSERT INTO crowdfunding_documents (post_id, doc_type, file_path, file_name, file_size, mime_type) 
                                 VALUES (:post_id, 'other', :file_path, :file_name, :file_size, :mime_type)";
                     $doc_stmt = $conn->prepare($doc_sql);
                     $doc_stmt->execute([
                         ':post_id' => $post_id,
-                        ':file_path' => $path,
+                        ':file_path' => $db_path,
                         ':file_name' => $filename,
                         ':file_size' => $filesize,
                         ':mime_type' => $filetype
@@ -152,22 +153,23 @@ if (isset($_POST['submit_fundraiser'])) {
 
                     if (in_array($ext, $allowed)) {
                         $new_filename = uniqid() . "_fund_" . $filename;
-                        $path = "images/uploads/funding/" . $new_filename;
+                        $path = "../images/uploads/funding/" . $new_filename;
 
                         // Create directory if not exists
-                        if (!file_exists("images/uploads/funding/")) {
-                            mkdir("images/uploads/funding/", 0777, true);
+                        if (!file_exists("../images/uploads/funding/")) {
+                            mkdir("../images/uploads/funding/", 0777, true);
                         }
 
                         if (move_uploaded_file($filetmp, $path)) {
-                            // Insert document record
+                            // Insert document record - store path without ../
+                            $db_path = "images/uploads/funding/" . $new_filename;
                             $doc_sql = "INSERT INTO crowdfunding_documents (post_id, doc_type, file_path, file_name, file_size, mime_type) 
                                         VALUES (:post_id, :doc_type, :file_path, :file_name, :file_size, :mime_type)";
                             $doc_stmt = $conn->prepare($doc_sql);
                             $doc_stmt->execute([
                                 ':post_id' => $post_id,
                                 ':doc_type' => $doc_type,
-                                ':file_path' => $path,
+                                ':file_path' => $db_path,
                                 ':file_name' => $filename,
                                 ':file_size' => $filesize,
                                 ':mime_type' => $filetype
@@ -179,7 +181,8 @@ if (isset($_POST['submit_fundraiser'])) {
         }
 
         $conn->commit();
-        echo "<script>alert('Fundraiser Created Successfully!'); window.location='../index.html';</script>";
+        header("Location: ../funding.html?fundraiser_success=1");
+        exit();
     } catch (PDOException $e) {
         $conn->rollBack();
         echo "Database Error: " . $e->getMessage();

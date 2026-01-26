@@ -20,6 +20,9 @@ const categoryFilterMap = {
 async function loadPosts() {
   try {
     const response = await fetch('api/api-get-approved-funding.php');
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
     const data = await response.json();
 
     if (data.success && data.posts) {
@@ -48,12 +51,22 @@ function displayPosts(posts) {
     const category = post.display_category || post.custom_category || post.category;
     const filterType = categoryFilterMap[category] || 'all';
 
+    // Add verified badge
+    const verifiedBadge = post.verification_status === 'verified'
+      ? ' <i class="fas fa-check-circle verified-badge-green" title="Verified Organizer"></i>'
+      : '';
+
     return `
       <div class="card" data-filter="${filterType}">
         <img src="${post.cover_image}" alt="${post.title}" onerror="this.src='images/default-fundraiser.jpg'">
         <div class="card-content">
           <div class="tag-date-row">
-            <span class="tag">${category}</span>
+            <div>
+              <span class="tag">${category}</span>
+              <div class="organizer-info">
+                <i class="fas fa-user"></i> ${post.full_name || post.username}${verifiedBadge}
+              </div>
+            </div>
             <span class="date">Posted on ${post.created_at_formatted}</span>
           </div>
           <h3>${post.title}</h3>
@@ -201,9 +214,16 @@ document.addEventListener('DOMContentLoaded', function () {
   const successParam = urlParams.get('success');
   const donationAmount = urlParams.get('amount');
   const transactionId = urlParams.get('txn');
+  const fundraiserSuccess = urlParams.get('fundraiser_success');
 
   if (successParam === '1') {
     showSuccessNotification(donationAmount, transactionId);
+    // Clean URL by removing success parameters
+    window.history.replaceState({}, document.title, 'funding.html');
+  }
+
+  if (fundraiserSuccess === '1') {
+    showFundraiserCreatedNotification();
     // Clean URL by removing success parameters
     window.history.replaceState({}, document.title, 'funding.html');
   }
@@ -229,4 +249,25 @@ function showSuccessNotification(amount, txnId) {
     toast.style.animation = 'slideOut 0.4s ease';
     setTimeout(() => toast.remove(), 400);
   }, 3000);
+}
+// Show fundraiser created notification toast
+function showFundraiserCreatedNotification() {
+  const toast = document.createElement('div');
+  toast.className = 'success-toast';
+  toast.innerHTML = `
+    <i class="fas fa-check-circle toast-icon"></i>
+    <div class="toast-content">
+      <h4>Fundraiser Created Successfully!</h4>
+      <p>Your fundraiser has been created and is now live. Share it with others to start receiving donations!</p>
+    </div>
+    <button class="toast-close" onclick="this.parentElement.remove()">×</button>
+  `;
+
+  document.body.appendChild(toast);
+
+  // Auto remove after 4 seconds (bit longer for this message)
+  setTimeout(() => {
+    toast.style.animation = 'slideOut 0.4s ease';
+    setTimeout(() => toast.remove(), 400);
+  }, 4000);
 }

@@ -140,9 +140,7 @@ function attachEventListeners() {
     document.querySelectorAll('.btn-decline').forEach(btn => {
         btn.addEventListener('click', function () {
             const postId = this.getAttribute('data-id');
-            if (confirm('Are you sure you want to decline this fundraiser?')) {
-                handleApproval(postId, 'reject');
-            }
+            handleApproval(postId, 'reject');
         });
     });
 }
@@ -172,17 +170,35 @@ async function handleApproval(postId, action) {
         console.log('Approval response:', data);
 
         if (data.success) {
-            alert(`Fundraiser ${action === 'approve' ? 'approved' : 'declined'} successfully!`);
+            showNotification(
+                `Fundraiser ${action === 'approve' ? 'approved' : 'declined'} successfully!`,
+                'success'
+            );
             loadFundraisers();
         } else {
-            alert('Error: ' + (data.error || 'Unknown error occurred'));
+            showNotification('Error: ' + (data.error || 'Unknown error occurred'), 'error');
             buttons.forEach(btn => btn.disabled = false);
         }
     } catch (error) {
         console.error('Error during approval:', error);
-        alert('An error occurred: ' + error.message);
+        showNotification('An error occurred: ' + error.message, 'error');
         buttons.forEach(btn => btn.disabled = false);
     }
+}
+
+function showNotification(message, type = 'success') {
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    notification.innerHTML = `
+        <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i>
+        <span>${message}</span>
+    `;
+    document.body.appendChild(notification);
+
+    setTimeout(() => {
+        notification.style.animation = 'slideOut 0.3s ease-out';
+        setTimeout(() => notification.remove(), 300);
+    }, 3000);
 }
 
 function viewFundingDocuments(postId) {

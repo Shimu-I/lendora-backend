@@ -4,6 +4,25 @@ const customCategoryInput = document.getElementById('customCategory');
 const hiddenCategoryInput = document.getElementById('hiddenCategory');
 let selectedCategory = '';
 
+// Title character counter
+const titleInput = document.getElementById('title');
+const titleCounter = document.getElementById('titleCounter');
+
+if (titleInput && titleCounter) {
+    titleInput.addEventListener('input', function () {
+        const length = this.value.length;
+        titleCounter.textContent = `${length} / 100 characters`;
+
+        if (length >= 90) {
+            titleCounter.style.color = '#dc3545';
+        } else if (length >= 70) {
+            titleCounter.style.color = '#f5b800';
+        } else {
+            titleCounter.style.color = '#00bfa5';
+        }
+    });
+}
+
 // Cover Photo Upload Functionality
 const coverPhotoBtn = document.getElementById('coverPhotoBtn');
 const coverPhotoInput = document.getElementById('coverPhotoInput');
@@ -79,71 +98,23 @@ categoryButtons.forEach(button => {
 // Initialize - hide custom category input
 customCategoryInput.style.display = 'none';
 
-// Fund Breakdown functionality
-let itemCount = 0;
-
-function addBreakdownItem() {
-    itemCount++;
-    const container = document.getElementById('breakdownItems');
-    const itemDiv = document.createElement('div');
-    itemDiv.className = 'breakdown-item';
-    itemDiv.id = `item-${itemCount}`;
-
-    // Added name attributes for PHP processing
-    itemDiv.innerHTML = `
-        <input type="text" name="item_name[]" placeholder="Item Name" class="item-name" required>
-        <input type="number" name="item_quantity[]" placeholder="Quantity" class="item-quantity" min="1" required>
-        <input type="number" name="item_cost[]" placeholder="Cost per unit" class="item-cost" min="0" step="0.01" required>
-        <input type="number" placeholder="Total" class="item-total" readonly>
-    `;
-
-    container.appendChild(itemDiv);
-
-    // Add event listeners for auto-calculation
-    const quantityInput = itemDiv.querySelector('.item-quantity');
-    const costInput = itemDiv.querySelector('.item-cost');
-    const totalInput = itemDiv.querySelector('.item-total');
-
-    function calculateItemTotal() {
-        const quantity = parseFloat(quantityInput.value) || 0;
-        const cost = parseFloat(costInput.value) || 0;
-        const total = quantity * cost;
-        totalInput.value = total.toFixed(2);
-        calculateGrandTotal();
-    }
-
-    quantityInput.addEventListener('input', calculateItemTotal);
-    costInput.addEventListener('input', calculateItemTotal);
-}
-
-function calculateGrandTotal() {
-    const allTotals = document.querySelectorAll('.item-total');
-    let grandTotal = 0;
-
-    allTotals.forEach(input => {
-        const value = parseFloat(input.value) || 0;
-        grandTotal += value;
-    });
-
-    document.getElementById('totalAmount').value = `Total: $${grandTotal.toFixed(2)}`;
-    document.getElementById('hiddenAmountNeeded').value = grandTotal.toFixed(2);
-}
-
-// Add Item Button
-document.getElementById('addItemBtn').addEventListener('click', addBreakdownItem);
-
-// Initialize with one item
-addBreakdownItem();
-
 // File Upload handlers
-document.querySelector('.upload-btn').addEventListener('click', function () {
-    document.getElementById('fileUpload').click();
-});
+const documentUploadBtn = document.getElementById('documentUploadBtn');
+if (documentUploadBtn) {
+    documentUploadBtn.addEventListener('click', function () {
+        document.getElementById('fileUpload').click();
+    });
+}
 
 document.getElementById('fileUpload').addEventListener('change', function (e) {
     const files = e.target.files;
+    const fileList = document.getElementById('fileList');
+
     if (files.length > 0) {
-        alert(`${files.length} file(s) selected`);
+        const fileNames = Array.from(files).map(file => file.name).join(', ');
+        fileList.innerHTML = `<i class="fas fa-check-circle"></i> ${files.length} file(s) selected: ${fileNames}`;
+    } else {
+        fileList.innerHTML = '';
     }
 });
 

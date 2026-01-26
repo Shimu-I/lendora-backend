@@ -38,7 +38,9 @@
             <!-- 1. Fundraiser Title -->
             <div class="form-group">
                 <label class="section-label">1. Fundraiser Title</label>
-                <input type="text" name="title" id="title" placeholder="Winter Clothes for Street Children" required>
+                <input type="text" name="title" id="title" placeholder="Winter Clothes for Street Children"
+                    maxlength="100" required>
+                <div class="char-counter" id="titleCounter">0 / 100 characters</div>
             </div>
 
             <!-- Cover Photo Upload -->
@@ -53,8 +55,9 @@
                         <p style="color: #888; font-size: 14px;">No cover photo selected</p>
                         <p style="color: #666; font-size: 12px;">Default category image will be used</p>
                     </div>
-                    <input type="file" name="cover_photo" id="coverPhotoInput" accept="image/*" hidden>
-                    <button type="button" class="upload-btn" id="coverPhotoBtn" style="margin-top: 12px;">
+                    <input type="file" name="cover_photo" id="coverPhotoInput"
+                        accept="image/jpeg,image/jpg,image/png,image/gif,image/webp" hidden>
+                    <button type="button" class="cover-upload-btn" id="coverPhotoBtn" style="margin-top: 12px;">
                         <i class="fas fa-camera"></i> Choose Cover Photo
                     </button>
                     <button type="button" class="remove-btn" id="removeCoverPhotoBtn"
@@ -109,24 +112,19 @@
                 </div>
             </div>
 
-            <!-- Fund Breakdown (New Section based on JS) -->
+            <!-- 3. Funding Goal -->
             <div class="form-group">
-                <label class="section-label">Fund Breakdown</label>
-                <div id="breakdownItems">
-                    <!-- Items injected by JS -->
-                </div>
-                <button type="button" id="addItemBtn" class="upload-btn" style="margin-top: 10px;">+ Add Item</button>
-                <div style="margin-top: 15px; font-weight: bold;">
-                    <input type="text" id="totalAmount" readonly value="Total: $0.00"
-                        style="border: none; background: transparent; font-size: 1.2em;">
-                    <input type="hidden" name="amount_needed" id="hiddenAmountNeeded">
-                </div>
+                <label class="section-label">3. Funding Goal Amount</label>
+                <p class="helper-text">How much money do you need to raise?</p>
+                <input type="number" name="amount_needed" placeholder="Enter amount in BDT (৳)" min="1" step="0.01"
+                    required
+                    style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 5px; font-size: 16px;">
             </div>
 
             <!-- 4. Proof & Verification -->
             <div class="form-group">
-                <label class="section-label">4. Additional Documents (Optional)</label>
-                <p class="helper-text">Upload supporting documents (optional):</p>
+                <label class="section-label">4. Additional Documents <span class="required">*</span></label>
+                <p class="helper-text">Upload supporting documents (required):</p>
                 <ol class="upload-list">
                     <li>Photos of incident / past work</li>
                     <li>Short video</li>
@@ -143,8 +141,12 @@
                     <option value="other">Other</option>
                 </select>
 
-                <button type="button" class="upload-btn">Choose File 📎</button>
-                <input type="file" name="crowd_documents[]" id="fileUpload" multiple hidden>
+                <button type="button" class="upload-btn" id="documentUploadBtn">Choose Files 📎</button>
+                <input type="file" name="crowd_documents[]" id="fileUpload"
+                    accept="image/jpeg,image/jpg,image/png,image/gif,image/webp,application/pdf,video/mp4,video/quicktime"
+                    multiple required hidden>
+                <div id="fileList" style="margin-top: 10px; color: #00bfa5; font-size: 14px;"></div>
+                <p style="color: #ff6b6b; font-size: 12px; margin-top: 5px;">* At least one document is required</p>
             </div>
 
             <!-- 5. Distribution / Action Plan -->
@@ -201,7 +203,7 @@
     <div id="footerPlaceholder"></div>
 
     <script src="javascript/header-footer.js"></script>
-    <script src="/javascript/funding-interface-form.js"></script>
+    <script src="javascript/funding-interface-form.js"></script>
 </body>
 
 </html>
