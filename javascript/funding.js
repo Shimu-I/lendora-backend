@@ -1,3 +1,31 @@
+// Only run blur/toast for unauthenticated users
+document.addEventListener('DOMContentLoaded', function() {
+  fetch('api/api-get-user-profile.php', { credentials: 'include' })
+    .then(response => response.json())
+    .then(data => {
+      if (!data.success || data.error === 'Not logged in') {
+        console.warn('Auth check: user not logged in — showing access denied toast');
+        document.body.style.filter = 'blur(18px)';
+        document.body.style.pointerEvents = 'none';
+          // Simple blocking modal fallback — guaranteed to show
+          alert('Access Denied: Please log in or sign up to view this page.');
+          document.body.style.filter = '';
+          document.body.style.pointerEvents = '';
+          window.location.replace('login.html');
+          return;
+      }
+      // authenticated — allow page scripts to run normally
+    })
+    .catch(() => {
+      // network or server error — fallback to blocking access
+      document.body.style.filter = 'blur(18px)';
+      document.body.style.pointerEvents = 'none';
+        alert('Access Denied: Please log in or sign up to view this page.');
+        document.body.style.filter = '';
+        document.body.style.pointerEvents = '';
+        window.location.replace('login.html');
+    });
+});
 // Global posts data
 let allPosts = [];
 let currentFilter = 'all';

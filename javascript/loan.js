@@ -1,3 +1,71 @@
+// Only run blur/toast for unauthenticated users
+document.addEventListener('DOMContentLoaded', function() {
+    fetch('api/api-get-user-profile.php', { credentials: 'include' })
+        .then(response => response.json())
+        .then(data => {
+                if (!data.success || data.error === 'Not logged in') {
+                    document.body.style.filter = 'blur(18px)';
+                    document.body.style.pointerEvents = 'none';
+                    var toast = document.createElement('div');
+                    toast.innerHTML = '<div style="display:flex;align-items:center;gap:12px;"><span style=\"font-size:1.6rem;color:#fff;background:#70C1BF;border-radius:50%;padding:8px;display:inline-block;\">&#9888;</span><span style=\"font-size:1.1rem;font-weight:500;color:#fff;\">Access Denied: Please <a href=\'login.html\' style=\'color:#70C1BF;text-decoration:underline;font-weight:700;\'>log in</a> or <a href=\'signup.html\' style=\'color:#70C1BF;text-decoration:underline;font-weight:700;\'>sign up</a> to view this page.</span></div>';
+                    toast.style.position = 'fixed';
+                    toast.style.top = '50%';
+                    toast.style.left = '50%';
+                    toast.style.transform = 'translate(-50%,-50%)';
+                    toast.style.background = 'rgba(10,31,47,0.98)';
+                    toast.style.border = '2px solid #70C1BF';
+                    toast.style.borderRadius = '16px';
+                    toast.style.padding = '28px 38px';
+                    toast.style.boxShadow = '0 6px 32px rgba(0,0,0,0.25)';
+                    toast.style.zIndex = '99999';
+                    toast.style.opacity = '1';
+                    toast.style.transition = 'none';
+                    toast.style.textAlign = 'center';
+                    toast.style.maxWidth = '90vw';
+                    toast.style.fontFamily = 'Roboto, Arial, sans-serif';
+                    document.body.appendChild(toast);
+                    // blocking alert fallback (guaranteed to show)
+                    document.body.style.filter = 'blur(18px)';
+                    document.body.style.pointerEvents = 'none';
+                    alert('Access Denied: Please log in or sign up to view this page.');
+                    document.body.style.filter = '';
+                    document.body.style.pointerEvents = '';
+                    window.location.replace('login.html');
+                    return;
+            }
+            // ...existing code...
+        })
+        .catch(() => {
+            // fallback: treat as not logged in
+            document.body.style.filter = 'blur(18px)';
+            document.body.style.pointerEvents = 'none';
+            var toast = document.createElement('div');
+            toast.innerHTML = '<div style="display:flex;align-items:center;gap:12px;"><span style=\"font-size:1.6rem;color:#fff;background:#70C1BF;border-radius:50%;padding:8px;display:inline-block;\">&#9888;</span><span style=\"font-size:1.1rem;font-weight:500;color:#fff;\">Access Denied: Please <a href=\'login.html\' style=\'color:#70C1BF;text-decoration:underline;font-weight:700;\'>log in</a> or <a href=\'signup.html\' style=\'color:#70C1BF;text-decoration:underline;font-weight:700;\'>sign up</a> to view this page.</span></div>';
+            toast.style.position = 'fixed';
+            toast.style.top = '50%';
+            toast.style.left = '50%';
+            toast.style.transform = 'translate(-50%,-50%)';
+            toast.style.background = 'rgba(10,31,47,0.98)';
+            toast.style.border = '2px solid #70C1BF';
+            toast.style.borderRadius = '16px';
+            toast.style.padding = '28px 38px';
+            toast.style.boxShadow = '0 6px 32px rgba(0,0,0,0.25)';
+            toast.style.zIndex = '99999';
+            toast.style.opacity = '1';
+            toast.style.transition = 'none';
+            toast.style.textAlign = 'center';
+            toast.style.maxWidth = '90vw';
+            toast.style.fontFamily = 'Roboto, Arial, sans-serif';
+            document.body.appendChild(toast);
+            // fallback: blocking alert
+            document.body.style.filter = 'blur(18px)';
+            document.body.style.pointerEvents = 'none';
+            alert('Access Denied: Please log in or sign up to view this page.');
+            document.body.style.filter = '';
+            document.body.style.pointerEvents = '';
+            window.location.replace('login.html');
+        });
+});
 document.addEventListener('DOMContentLoaded', function () {
     // Check for success message from loan request submission
     if (localStorage.getItem('loanRequestSuccess') === 'true') {

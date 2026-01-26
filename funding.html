@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <!-- Body hiding handled in JS for smooth transition -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Funding page</title>
@@ -17,7 +18,8 @@
   <link rel="stylesheet" href="styles/index.css" />
   <link rel="stylesheet" href="styles/header-footer.css">
   <link rel="stylesheet" href="styles/notification-bell.css">
-  <link rel="stylesheet" href="styles/funding.css" />
+    <link rel="stylesheet" href="styles/funding.css">
+    <!-- Login check moved to funding.js -->
   <link rel="stylesheet" href="styles/payment-gateway.css" />
   <link rel="stylesheet" href="styles/payment-modal.css" />
   <link rel="stylesheet" href="styles/verified-badge.css" />
@@ -30,6 +32,24 @@
 
   <!-- HEADER -->
   <div id="headerPlaceholder"></div>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var loggedIn = localStorage.getItem('loggedIn') || sessionStorage.getItem('loggedIn');
+        if (loggedIn) {
+          fetch('includes/header-loggedin.html')
+            .then(response => response.text())
+            .then(html => {
+              document.getElementById('headerPlaceholder').innerHTML = html;
+            });
+        } else {
+          fetch('includes/header.html')
+            .then(response => response.text())
+            .then(html => {
+              document.getElementById('headerPlaceholder').innerHTML = html;
+            });
+        }
+      });
+    </script>
 
   <!-- Main Section -->
   <main>

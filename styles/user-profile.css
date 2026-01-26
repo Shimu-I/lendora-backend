@@ -469,13 +469,14 @@ body {
 
 /* Badge Styles */
 .badge {
-  padding: 6px 16px;
+  background: #70C1BF;
+  color: #0f1419;
+  padding: 5px 12px;
   border-radius: 20px;
-  font-size: 0.85rem;
+  font-size: 12px;
   font-weight: 600;
-  text-align: center;
+  text-transform: uppercase;
   display: inline-block;
-  text-transform: capitalize;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
   letter-spacing: 0.3px;
 }

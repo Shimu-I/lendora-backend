@@ -1,3 +1,71 @@
+// Only run blur/toast for unauthenticated users
+document.addEventListener('DOMContentLoaded', function() {
+    fetch('api/api-get-user-profile.php', { credentials: 'include' })
+        .then(response => response.json())
+        .then(data => {
+            if (!data.success || data.error === 'Not logged in') {
+                document.body.style.filter = 'blur(18px)';
+                document.body.style.pointerEvents = 'none';
+                var toast = document.createElement('div');
+                toast.innerHTML = '<div style="display:flex;align-items:center;gap:12px;"><span style=\"font-size:1.6rem;color:#fff;background:#70C1BF;border-radius:50%;padding:8px;display:inline-block;\">&#9888;</span><span style=\"font-size:1.1rem;font-weight:500;color:#fff;\">Access Denied: Please <a href=\'login.html\' style=\'color:#70C1BF;text-decoration:underline;font-weight:700;\'>log in</a> or <a href=\'signup.html\' style=\'color:#70C1BF;text-decoration:underline;font-weight:700;\'>sign up</a> to view this page.</span></div>';
+                toast.style.position = 'fixed';
+                toast.style.top = '50%';
+                toast.style.left = '50%';
+                toast.style.transform = 'translate(-50%,-50%)';
+                toast.style.background = 'rgba(10,31,47,0.98)';
+                toast.style.border = '2px solid #70C1BF';
+                toast.style.borderRadius = '16px';
+                toast.style.padding = '28px 38px';
+                toast.style.boxShadow = '0 6px 32px rgba(0,0,0,0.25)';
+                toast.style.zIndex = '99999';
+                toast.style.opacity = '1';
+                toast.style.transition = 'none';
+                toast.style.textAlign = 'center';
+                toast.style.maxWidth = '90vw';
+                toast.style.fontFamily = 'Roboto, Arial, sans-serif';
+                document.body.appendChild(toast);
+                // blocking alert fallback
+                document.body.style.filter = 'blur(18px)';
+                document.body.style.pointerEvents = 'none';
+                alert('Access Denied: Please log in or sign up to view this page.');
+                document.body.style.filter = '';
+                document.body.style.pointerEvents = '';
+                window.location.replace('login.html');
+                return;
+            }
+            // ...existing code...
+        })
+        .catch(() => {
+            // fallback: treat as not logged in
+            document.body.style.filter = 'blur(18px)';
+            document.body.style.pointerEvents = 'none';
+            var toast = document.createElement('div');
+            toast.innerHTML = '<div style="display:flex;align-items:center;gap:12px;"><span style=\"font-size:1.6rem;color:#fff;background:#70C1BF;border-radius:50%;padding:8px;display:inline-block;\">&#9888;</span><span style=\"font-size:1.1rem;font-weight:500;color:#fff;\">Access Denied: Please <a href=\'login.html\' style=\'color:#70C1BF;text-decoration:underline;font-weight:700;\'>log in</a> or <a href=\'signup.html\' style=\'color:#70C1BF;text-decoration:underline;font-weight:700;\'>sign up</a> to view this page.</span></div>';
+            toast.style.position = 'fixed';
+            toast.style.top = '50%';
+            toast.style.left = '50%';
+            toast.style.transform = 'translate(-50%,-50%)';
+            toast.style.background = 'rgba(10,31,47,0.98)';
+            toast.style.border = '2px solid #70C1BF';
+            toast.style.borderRadius = '16px';
+            toast.style.padding = '28px 38px';
+            toast.style.boxShadow = '0 6px 32px rgba(0,0,0,0.25)';
+            toast.style.zIndex = '99999';
+            toast.style.opacity = '1';
+            toast.style.transition = 'none';
+            toast.style.textAlign = 'center';
+            toast.style.maxWidth = '90vw';
+            toast.style.fontFamily = 'Roboto, Arial, sans-serif';
+            document.body.appendChild(toast);
+            // fallback: blocking alert
+            document.body.style.filter = 'blur(18px)';
+            document.body.style.pointerEvents = 'none';
+            alert('Access Denied: Please log in or sign up to view this page.');
+            document.body.style.filter = '';
+            document.body.style.pointerEvents = '';
+            window.location.replace('login.html');
+        });
+});
 document.addEventListener('DOMContentLoaded', function () {
     loadUserProfile();
     setupEventListeners();
@@ -362,114 +430,4 @@ function showToast(title, message, type = 'success') {
         toast.style.animation = 'slideOut 0.4s ease';
         setTimeout(() => toast.remove(), 400);
     }, 5000);
-}
-// View Loan Offers Modal
-async function viewLoanOffers(loanId) {
-    try {
-        const response = await fetch($("api/api-get-loan-offers.php?loan_id=" + loanId), {
-            credentials: 'include'
-        });
-        const data = await response.json();
-
-        if (!data.success) {
-            showToast('Error', data.error || 'Failed to load offers', 'error');
-            return;
-        }
-
-        if (!data.offers || data.offers.length === 0) {
-            showToast('No Offers', 'No pending offers for this loan', 'info');
-            return;
-        }
-
-        showOffersModal(data.offers, loanId, data.loan);
-    } catch (error) {
-        console.error('Error:', error);
-        showToast('Error', 'Failed to load offers', 'error');
-    }
-}
-
-function showOffersModal(offers, loanId, loan) {
-    const modal = document.createElement('div');
-    modal.className = 'offers-modal-overlay';
-    modal.innerHTML = "<div class='offers-modal'>"
-        + "<div class='offers-modal-header'>"
-        + "<h2><i class='fas fa-hand-holding-usd'></i> Loan Offers (" + offers.length + ")</h2>"
-        + "<p>Loan Amount: " + parseFloat(loan.amount).toLocaleString() + "</p>"
-        + "<button class='offers-modal-close' onclick='this.closest(\".offers-modal-overlay\").remove()'>"
-        + "<i class='fas fa-times'></i>"
-        + "</button>"
-        + "</div>"
-        + "<div class='offers-modal-body'>"
-        + offers.map(offer => "<div class='offer-card'>"
-            + "<div class='offer-header'>"
-                + "<div class='offer-lender-info'>"
-                    + "<i class='fas fa-user-circle' style='font-size: 2.5rem; color: #70C1BF;'></i>"
-                    + "<div>"
-                        + "<h3>" + (offer.lender_name || offer.lender_username)
-                        + (offer.verification_status === 'verified' ? " <i class='fas fa-check-circle verified-badge' title='Verified User'></i>" : "")
-                        + "</h3>"
-                        + "<p class='offer-rating'>"
-                        + (offer.lender_rating > 0 ? " " + parseFloat(offer.lender_rating).toFixed(1) + " (" + offer.rating_count + " reviews)" : "No ratings yet")
-                        + "</p>"
-                    + "</div>"
-                + "</div>"
-                + "<div class='offer-date'>" + new Date(offer.created_at).toLocaleDateString() + "</div>"
-            + "</div>"
-            + "<div class='offer-details'>"
-                + "<div class='offer-detail-row'>"
-                    + "<span class='offer-label'><i class='fas fa-money-bill-wave'></i> Offer Amount:</span>"
-                    + "<span class='offer-value'>" + parseFloat(offer.amount).toLocaleString() + "</span>"
-                + "</div>"
-                + "<div class='offer-detail-row'>"
-                    + "<span class='offer-label'><i class='fas fa-percentage'></i> Interest Rate:</span>"
-                    + "<span class='offer-value'>" + (offer.interest_rate > 0 ? offer.interest_rate + "%" : "Interest-Free") + "</span>"
-                + "</div>"
-                + (offer.terms ? ("<div class='offer-terms'>"
-                    + "<span class='offer-label'><i class='fas fa-file-contract'></i> Terms:</span>"
-                    + "<p>" + offer.terms + "</p>"
-                + "</div>") : "")
-            + "</div>"
-            + "<button class='btn-accept-offer' onclick='acceptOffer(" + offer.offer_id + ", " + loanId + ")'>"
-                + "<i class='fas fa-check-circle'></i> Accept This Offer"
-            + "</button>"
-        + "</div>")
-        .join("")
-        + "</div>"
-        + "</div>";
-
-    document.body.appendChild(modal);
-
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) {
-            modal.remove();
-        }
-    });
-}
-
-async function acceptOffer(offerId, loanId) {
-    if (!confirm('Are you sure you want to accept this offer? All other offers will be automatically rejected.')) {
-        return;
-    }
-
-    try {
-        const response = await fetch('api/api-accept-offer.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            credentials: 'include',
-            body: JSON.stringify({ offer_id: offerId })
-        });
-
-        const data = await response.json();
-
-        if (data.success) {
-            showToast('Success!', 'Offer accepted successfully. The lender has been notified.', 'success');
-            document.querySelector('.offers-modal-overlay')?.remove();
-            setTimeout(() => loadUserProfile(), 1500);
-        } else {
-            showToast('Error', data.error || 'Failed to accept offer', 'error');
-        }
-    } catch (error) {
-        console.error('Error:', error);
-        showToast('Error', 'Failed to accept offer', 'error');
-    }
 }
