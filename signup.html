@@ -28,7 +28,7 @@
         <div class="auth-form">
           <h2>Sign Up</h2>
 
-          <form action="php/signup.php" method="POST" enctype="multipart/form-data">
+          <form action="php/signup.php" method="POST">
 
             <input type="text" name="full_name" placeholder="Full Name" required>
 
@@ -37,24 +37,6 @@
             <input type="email" name="email" placeholder="Email" required>
 
             <input type="password" name="password" placeholder="Password" required>
-
-            <input type="tel" name="phone" placeholder="Phone Number">
-
-            <input type="text" name="student_id" placeholder="Student ID (Optional)">
-
-            <input type="text" name="university" placeholder="University (Optional)">
-
-            <input type="text" name="nid_number" placeholder="NID Number (Optional)">
-
-            <select name="role" required
-              style="width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 8px;">
-              <option value="student">Student</option>
-              <option value="lender">Lender</option>
-            </select>
-
-            <label for="profile_image" style="display: block; margin-bottom: 5px; color: #666;">Profile Image
-              (Optional)</label>
-            <input type="file" name="profile_image" id="profile_image" accept="image/*" style="margin-bottom: 15px;">
 
             <button type="submit" name="signup_btn" class="btn-primary">Sign Up</button>
 

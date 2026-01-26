@@ -155,7 +155,7 @@ nav a:hover {
 .hero {
   background: var(--bg-dark);
   color: white;
-  padding: 5rem 5% 8rem;
+  padding: 5rem 5% 7rem;
 }
 
 .hero-content {
@@ -282,8 +282,8 @@ nav a:hover {
 }
 
 .features-section h2 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
+  font-size: 1.6rem;
+  margin-bottom: 0.75rem;
   color: var(--primary);
 }
 
@@ -293,24 +293,24 @@ nav a:hover {
 
 .features-section>p {
   max-width: 800px;
-  margin: 0 auto 3rem;
-  font-size: 1rem;
+  margin: 0 auto 2.5rem;
+  font-size: 0.9rem;
   color: var(--gray);
 }
 
 .avatars {
   display: flex;
   justify-content: center;
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
 }
 
 .avatars img {
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
-  border: 4px solid white;
+  border: 3px solid white;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  margin-left: -15px;
+  margin-left: -12px;
   /* overlap avatars */
   transition: transform 0.3s, box-shadow 0.3s;
   /* smooth hover effect */
@@ -337,8 +337,8 @@ nav a:hover {
 
 .card {
   background: white;
-  padding: 2.5rem 2rem;
-  border-radius: 20px;
+  padding: 1.75rem 1.5rem;
+  border-radius: 15px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
   transition: transform .3s;
 }
@@ -353,14 +353,14 @@ nav a:hover {
 }
 
 .card-icon {
-  width: 80px;
-  height: 80px;
+  width: 65px;
+  height: 65px;
   background: rgba(0, 212, 194, 0.15);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 1.5rem;
+  margin: 0 auto 1.25rem;
 }
 
 .highlight .card-icon {
@@ -368,7 +368,7 @@ nav a:hover {
 }
 
 .card-icon i {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   color: var(--primary);
 }
 
@@ -377,13 +377,13 @@ nav a:hover {
 }
 
 .card h3 {
-  font-size: 1.2rem;
-  margin-bottom: 1rem;
+  font-size: 1.05rem;
+  margin-bottom: 0.75rem;
 }
 
 .card p {
   color: var(--gray);
-  font-size: 1rem;
+  font-size: 0.9rem;
 }
 
 .highlight p {
