@@ -6,16 +6,8 @@ function initNotifications() {
     if (window._notificationInterval) clearInterval(window._notificationInterval);
     window._notificationInterval = setInterval(loadNotificationCount, 30000);
 
-    // Show notification dropdown automatically after login (if logged in)
-    if (window.localStorage.getItem('isLoggedIn') === 'true') {
-        setTimeout(() => {
-            const dropdown = document.getElementById('notificationDropdown');
-            if (dropdown && !dropdown.classList.contains('active')) {
-                dropdown.classList.add('active');
-                loadNotificationDropdown();
-            }
-        }, 300); // slight delay to ensure header content is fully parsed
-    }
+    // NOTE: removed automatic opening of the dropdown on page load
+    // The bell should only open the dropdown when the user clicks it.
 
     // Close dropdown when clicking outside
     document.addEventListener('click', function(e) {

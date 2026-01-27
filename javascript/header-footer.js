@@ -6,17 +6,48 @@ document.addEventListener("DOMContentLoaded", function () {
   const headerPlaceholder = document.getElementById("headerPlaceholder");
 
   if (headerPlaceholder) {
-    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-    const headerFile = isLoggedIn
-      ? "includes/header-loggedin.html"
-      : "includes/header.html";
+    // If some pages already injected the header (inline script), avoid double-loading.
+    if (headerPlaceholder.innerHTML && headerPlaceholder.innerHTML.trim().length > 0) {
+      // Header is already present — ensure notification wiring runs if needed.
+      if (document.querySelector('.notification-bell')) {
+        if (typeof initNotifications === 'function') {
+          try { initNotifications(); } catch (e) { console.error('initNotifications failed', e); }
+        } else if (!document.querySelector('script[data-notif-script]')) {
+          const s = document.createElement('script');
+          s.src = 'javascript/notification-count.js';
+          s.setAttribute('data-notif-script', '1');
+          s.onload = function() {
+            if (typeof initNotifications === 'function') {
+              try { initNotifications(); } catch (e) { console.error('initNotifications failed', e); }
+            }
+          };
+          document.body.appendChild(s);
+        }
+      }
+      // Skip the dynamic header loading since it's already present.
+      // Continue to footer logic below.
+    } else {
+    (async function loadHeader() {
+      // Prefer server-validated session to decide which header to load
+      let isLoggedIn = false;
+      try {
+        const resp = await fetch('api/api-get-user-profile.php', { credentials: 'include' });
+        const json = await resp.json();
+        if (json && json.success) isLoggedIn = true;
+      } catch (err) {
+        // ignore network/auth errors and fallback to localStorage below
+      }
 
-    fetch(headerFile)
-      .then(r => {
+      if (!isLoggedIn) {
+        isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+      }
+
+      const headerFile = isLoggedIn ? "includes/header-loggedin.html" : "includes/header.html";
+
+      try {
+        const r = await fetch(headerFile);
         if (!r.ok) throw new Error("Header 404: " + headerFile);
-        return r.text();
-      })
-      .then(html => {
+        const html = await r.text();
         headerPlaceholder.outerHTML = html;
 
         // Initialize page features that depend on header being present
@@ -57,12 +88,12 @@ document.addEventListener("DOMContentLoaded", function () {
           if (nameEl) nameEl.textContent = localStorage.getItem("userName") || "User";
           if (avatarEl) avatarEl.src = localStorage.getItem("userAvatar") || avatarEl.src;
         }
-      })
-      .catch(err => {
+      } catch (err) {
         console.error(err);
-        headerPlaceholder.innerHTML =
-          "<p style='color:red;text-align:center;padding:1rem;'>Header failed to load</p>";
-      });
+        headerPlaceholder.innerHTML = "<p style='color:red;text-align:center;padding:1rem;'>Header failed to load</p>";
+      }
+    })();
+    }
   }
 
   // ================== FOOTER ==================
